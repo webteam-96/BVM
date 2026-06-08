@@ -15,18 +15,25 @@ Double-click **`index.html`**, or drag it into any modern browser.
 > logo + sponsor/exhibitor logos from bharatiyavyaparmahotsav.com, a live QR (api.qrserver.com),
 > and themed photos (LoremFlickr → Picsum fallback). Everything else lives in the one file.
 
-## 12 screens
+## 16 screens
 
-Splash · Login/OTP · Home (discovery) · **Stall Detail (full exhibitor profile)** · Product Detail ·
-Send Enquiry · Saved Confirmation · Saved Stalls · **Zones** · **Scanner** · **Notifications** · **Profile**
-— all inside a centered iPhone frame. Bottom nav (Home · Zones · Scanner · Saved · Profile) and the
-notification bell are all wired to real screens.
+Splash · **Login (Visitor / Exhibitor)** · Home (discovery) · **Stall Detail (full exhibitor profile)** ·
+Product Detail · Send Enquiry · **Book a Meeting** · Saved Confirmation · Saved Stalls · **Zones** ·
+**Scanner** · **Notifications** · **Profile** · **Venue Map** · **Exhibitor Dashboard** · **Edit Stall Profile**
+— all inside a centered iPhone frame.
 
 ## What's functional
 
-- **OTP login** — tap `Send code` (demo code **4-8-2-9-3-1**), type it (auto-advance), `Verify`. Wrong/short codes shake.
+- **Dual login** — toggle **Visitor** or **Exhibitor**. OTP: tap `Send code` (demo **4-8-2-9-3-1**), type it, `Verify`
+  (wrong/short codes shake). Visitor → Home; Exhibitor → Exhibitor Dashboard.
 - **Live search** + **17 sector filters** — combine live across 37 exhibitors (e.g. Consumer + "water" → Kent RO).
 - **Save / wishlist** — heart any exhibitor → it appears in the data-driven Saved list + Profile count.
+- **Venue Map** — interactive Bharat Mandapam floor plan; **tap a stall dot or search a name** to draw a
+  **best route from the entrance** with walking distance + time. Deep-link a route via `?route=<id>`.
+- **Book a Meeting** — from any stall: pick day (12–15 Aug), time slot, person & purpose → confirms (updates Profile count).
+- **Exhibitor Dashboard** — the logged-in exhibitor gets a generated **booth QR** (visitors scan it to open the
+  stall), live analytics (views/scans/saves/enquiries), **leads**, **meeting requests**, and an editable
+  **stall profile** (edits flow through to the public stall, featured row, grid and map).
 - **Scanner** — animated QR viewfinder; **Simulate a Scan** opens a random stall; or type a stall code (e.g. `B2B-A-050`).
 - **Zones** — the 8 real BVM zones with live exhibitor counts; tap a sector to jump to a filtered Home.
 - **Notifications** — themed alerts with unread states, tap-to-open, and Mark-all-read (updates the bell badge).
