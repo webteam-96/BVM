@@ -1,0 +1,8 @@
+# Claude Code local workspace
+.claude/
+
+# temp / generated artifacts
+.*.png
+.dom.html
+*.tmp
+*.log

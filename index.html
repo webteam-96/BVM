@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bharatiya Vyapar Mahotsav 2026 — Interactive Demo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        navy:'#001454', navy2:'#1A2B6B', accent:'#a04100', cta:'#fe6b00', gold:'#f5be3c',
+        agri:'#2d7a3a', tech:'#1a6baa', infra:'#e8612a', handi:'#c8960c', tourism:'#6b4c9a', finance:'#2aa68a',
+        body:'#454650', muted:'#767681', ink:'#1b1c19',
+        surface:'#fbf9f4', surface2:'#f0eee9', beige:'#f5f3ee', line:'#e5e7eb', peri:'#dde1ff', periln:'#b8c4ff',
+      },
+      fontFamily: { rajdhani:['Rajdhani','sans-serif'], dm:['"DM Sans"','sans-serif'] },
+      boxShadow: {
+        phone:'0 40px 90px -20px rgba(0,0,20,.55), 0 0 0 11px #0b0b10, 0 0 0 13px #2a2a33',
+        card:'0 4px 18px -6px rgba(0,20,84,.12)', nav:'0 -4px 18px -8px rgba(0,20,84,.18)',
+      }
+    }}
+  }
+</script>
+
+<style>
+  html, body { height: 100%; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #20306e 0%, transparent 60%),
+      radial-gradient(900px 700px at 110% 110%, #1a1c2b 0%, transparent 55%),
+      #0c0e16;
+    background-color: #0c0e16;
+  }
+  .font-r { font-family: 'Rajdhani', sans-serif; }
+  .noscroll::-webkit-scrollbar { display: none; }
+  .noscroll { -ms-overflow-style: none; scrollbar-width: none; }
+  #stage { position: relative; }
+  .screen { display: none; flex-direction: column; height: 100%; }
+  .screen.active { display: flex; animation: slidein .32s cubic-bezier(.22,.61,.36,1); }
+  @keyframes slidein { from { opacity:0; transform: translateY(8px) scale(.992);} to { opacity:1; transform:none;} }
+  .tricolor { background: linear-gradient(to bottom,#FF9933 0 33.33%,#ffffff 33.33% 66.66%,#138808 66.66% 100%); }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .blink { animation: blink 1.1s infinite; }
+  @keyframes shake { 0%,100%{transform:translateX(0);} 20%,60%{transform:translateX(-7px);} 40%,80%{transform:translateX(7px);} }
+  .shake { animation: shake .4s; }
+  @keyframes scan { 0%{top:6px;} 50%{top:228px;} 100%{top:6px;} }
+  .scanning { animation: scan 2.4s ease-in-out infinite; }
+  #toast { transition: opacity .25s, transform .25s; }
+  .tap { transition: transform .08s ease, filter .15s ease; cursor: pointer; }
+  .tap:active { transform: scale(.97); }
+  img.ph { background: linear-gradient(135deg,#1A2B6B,#a04100); }
+  .logoimg { background:#fff; }
+</style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-start py-6 px-3">
+
+  <div id="phone" class="relative shrink-0 rounded-[3.2rem] shadow-phone bg-black" style="width:428px; height:880px; padding:13px; transform-origin: top center;">
+    <div id="stage" class="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-surface">
+
+      <!-- status bar -->
+      <div class="absolute top-0 inset-x-0 z-40 h-[46px] bg-navy text-white flex items-end justify-between px-7 pb-1.5 select-none">
+        <span class="font-r font-semibold text-[15px] tracking-wide">9:41</span>
+        <div class="flex items-center gap-1.5"><i data-lucide="signal" class="w-4 h-4"></i><i data-lucide="wifi" class="w-4 h-4"></i><i data-lucide="battery-full" class="w-5 h-5"></i></div>
+      </div>
+      <div class="absolute top-[9px] left-1/2 -translate-x-1/2 z-50 w-[112px] h-[30px] bg-black rounded-full"></div>
+
+      <div class="absolute inset-x-0 bottom-0 top-[46px]">
+
+        <!-- ============ 1 · SPLASH ============ -->
+        <section id="screen-splash" class="screen active">
+          <div class="relative flex-1 overflow-hidden" style="background: radial-gradient(120% 90% at 20% 0%, #112155 0%, #1A2B6B 40%, #08102B 100%);">
+            <div class="absolute top-0 inset-x-0 h-[3px] bg-gold z-20"></div>
+            <div class="absolute inset-0 flex items-center justify-center opacity-[.06] pointer-events-none text-[260px] leading-none">🏛️</div>
+            <div class="relative h-full flex flex-col items-center justify-between py-10 px-6">
+              <div class="flex-1 flex flex-col items-center justify-center text-center">
+                <div class="w-[290px] rounded-[24px] bg-white shadow-[0_18px_50px_-10px_rgba(0,0,0,.45)] flex items-center justify-center p-5 ring-4 ring-gold/25">
+                  <img src="https://bharatiyavyaparmahotsav.com/images/Bharat-Vyapar-Mahotsav.png" class="w-full object-contain" alt="Bharatiya Vyapar Mahotsav 2026">
+                </div>
+                <p class="text-[11px] tracking-[.22em] text-[#8595DB] mt-5 font-medium uppercase">The Great Indian Common Market</p>
+              </div>
+
+              <div class="w-full">
+                <p class="text-center text-[10px] tracking-[.18em] text-white/45 mb-2 font-medium">ORGANISED BY</p>
+                <div class="bg-white rounded-xl flex items-center justify-center gap-4 px-5 py-3">
+                  <img src="https://bharatiyavyaparmahotsav.com/images/ITPO-logo.png" class="h-8 object-contain" alt="ITPO">
+                  <div class="w-px h-10 bg-line"></div>
+                  <img src="https://bharatiyavyaparmahotsav.com/images/CAIT-logo.png" class="h-14 object-contain" alt="CAIT">
+                </div>
+                <p class="text-center text-[10px] text-white/40 mt-2.5">Supported by Rotary District · BSL &amp; 40+ trade associations</p>
+                <button onclick="goTo('login')" class="tap mt-4 w-full bg-cta text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-[0_10px_24px_-6px_rgba(160,65,0,.5)] flex items-center justify-center gap-2">GET STARTED <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+              </div>
+            </div>
+            <div class="absolute bottom-0 inset-x-0 h-[3px] bg-gold z-20"></div>
+          </div>
+        </section>
+
+        <!-- ============ 2 · LOGIN / OTP ============ -->
+        <section id="screen-login" class="screen">
+          <header class="bg-navy px-5 pt-3 pb-3 border-b-[3px] border-gold">
+            <h1 class="font-r font-semibold text-white text-2xl">Welcome to BVM <span class="text-cta">2026</span></h1>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface px-4 py-5 space-y-4">
+            <div class="bg-white rounded-xl border border-line shadow-card p-4">
+              <p class="text-[12px] font-semibold tracking-wider text-body mb-3">MOBILE NUMBER</p>
+              <div class="flex items-center gap-3 border-b border-line pb-2">
+                <span class="font-r font-semibold text-xl text-navy">+91</span>
+                <input id="mobile" inputmode="numeric" maxlength="11" placeholder="00000 00000" class="flex-1 font-r font-semibold text-xl text-navy tracking-[2px] placeholder:text-[#C6C5D2] outline-none bg-transparent" />
+              </div>
+              <p class="text-[13px] text-body mt-2">We'll send a 6-digit secure code via SMS.</p>
+              <button onclick="sendOtp()" class="tap mt-3 text-[13px] font-semibold text-accent flex items-center gap-1"><i data-lucide="send" class="w-4 h-4"></i> Send code</button>
+            </div>
+
+            <div class="bg-white rounded-xl border border-line shadow-card p-4">
+              <p class="text-center text-[12px] font-semibold tracking-wider text-body mb-3">ENTER 6-DIGIT OTP</p>
+              <div id="otp" class="flex justify-center gap-2"></div>
+              <div class="flex items-center justify-between mt-3">
+                <span class="text-[13px] text-body">Didn't receive?</span>
+                <span class="font-r text-[15px] text-accent">Resend OTP in <span id="otpTimer">00:44</span></span>
+              </div>
+            </div>
+
+            <button onclick="verifyOtp()" class="tap w-full bg-cta text-white font-r font-semibold text-xl py-4 rounded-xl shadow-[0_10px_24px_-6px_rgba(254,107,0,.45)] flex items-center justify-center gap-2">VERIFY &amp; CONTINUE <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+            <button onclick="goTo('home')" class="tap w-full text-center text-[15px] font-bold text-navy underline decoration-accent underline-offset-4">Continue as Guest</button>
+
+            <div class="rounded-xl border border-periln p-4" style="background: rgba(221,225,255,.3);">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-lg bg-navy flex items-center justify-center shrink-0"><i data-lucide="calendar-days" class="w-6 h-6 text-white"></i></div>
+                <div class="leading-tight">
+                  <p class="font-r text-navy text-[15px] font-medium">12–15 August 2026</p>
+                  <p class="text-[13px] text-body">Bharat Mandapam, Pragati Maidan, New Delhi</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 mt-4 pt-3 border-t border-periln text-center">
+                <div><p class="font-r text-navy text-lg font-semibold">2000+</p><p class="text-[10px] text-body">EXHIBITORS</p></div>
+                <div class="border-x border-periln"><p class="font-r text-navy text-lg font-semibold">2 Lakh+</p><p class="text-[10px] text-body">DELEGATES</p></div>
+                <div><p class="font-r text-navy text-lg font-semibold">10 L+</p><p class="text-[10px] text-body">VISITORS</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ 3 · HOME ============ -->
+        <section id="screen-home" class="screen">
+          <header class="bg-navy px-4 pt-2.5 pb-3">
+            <div class="flex items-center justify-between">
+              <div class="leading-tight">
+                <h1 class="font-r font-bold text-white text-xl tracking-wide">BVM 2026</h1>
+                <p class="text-[10px] tracking-[.15em] text-white/70">BHARAT MANDAPAM</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <button onclick="goTo('scanner')" class="tap w-9 h-9 rounded-full bg-white/10 flex items-center justify-center"><i data-lucide="scan-line" class="w-5 h-5 text-white"></i></button>
+                <button onclick="goTo('notifications')" class="tap relative w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
+                  <i data-lucide="bell" class="w-5 h-5 text-white"></i>
+                  <span id="notifBadge" class="absolute -top-0.5 -right-0.5 bg-cta text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">5</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <div class="flex-1 overflow-y-auto noscroll bg-surface2 pb-3">
+            <div class="bg-navy px-4 pt-1 pb-0">
+              <p class="text-[11px] text-white/75 mb-2">12–15 August 2026 · Bharat Mandapam, New Delhi</p>
+              <div class="flex items-end justify-center gap-2 pb-3">
+                <div class="text-center"><span class="font-r font-bold text-white text-4xl" id="cdD">02</span><span class="font-r text-white/60 text-lg">D</span></div>
+                <span class="font-r text-2xl mb-1 blink" style="color:#ffdbcc">:</span>
+                <div class="text-center"><span class="font-r font-bold text-white text-4xl" id="cdH">14</span><span class="font-r text-white/60 text-lg">H</span></div>
+                <span class="font-r text-2xl mb-1 blink" style="color:#ffdbcc">:</span>
+                <div class="text-center"><span class="font-r font-bold text-white text-4xl" id="cdM">35</span><span class="font-r text-white/60 text-lg">M</span></div>
+              </div>
+            </div>
+            <div class="h-1 tricolor"></div>
+
+            <!-- search -->
+            <div class="px-4 mt-4">
+              <div class="bg-white rounded-xl border border-line flex items-center gap-2 px-3 py-3 shadow-card focus-within:border-accent">
+                <i data-lucide="search" class="w-5 h-5 text-muted"></i>
+                <input id="searchInput" oninput="renderGrid()" placeholder="Search stalls, companies, sectors…" class="flex-1 text-[14px] text-body placeholder:text-muted outline-none bg-transparent" />
+                <button onclick="clearSearch()" id="clearBtn" class="hidden"><i data-lucide="x" class="w-4 h-4 text-muted"></i></button>
+              </div>
+            </div>
+
+            <!-- sector filter chips -->
+            <div class="flex items-center justify-between px-4 mt-5">
+              <h2 class="font-r font-semibold text-navy text-xl">Explore Sectors</h2>
+              <button onclick="toast('🗺️ Opening venue map')" class="tap text-[11px] font-bold tracking-wider text-accent flex items-center gap-1">VIEW MAP <i data-lucide="map" class="w-3.5 h-3.5"></i></button>
+            </div>
+            <div id="chips" class="flex gap-2 overflow-x-auto noscroll px-4 mt-3 pb-1"></div>
+
+            <!-- featured -->
+            <h2 class="font-r font-semibold text-navy text-xl px-4 mt-5">Featured Exhibitors</h2>
+            <div id="featuredRow" class="flex gap-3 overflow-x-auto noscroll px-4 mt-3 pb-1"></div>
+
+            <!-- all -->
+            <div class="flex items-center justify-between px-4 mt-5">
+              <h2 class="font-r font-semibold text-navy text-xl">All Exhibitors <span id="exCount" class="text-accent text-base">(22)</span></h2>
+              <button onclick="toast('↕ Sort options')" class="tap text-[11px] font-bold tracking-wider text-accent flex items-center gap-1">SORT BY: NAME <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+            </div>
+            <div id="homeGrid" class="grid grid-cols-2 gap-3 px-4 mt-3"></div>
+          </div>
+          <div class="bottomnav" data-active="home"></div>
+        </section>
+
+        <!-- ============ 4 · STALL DETAIL (dynamic) ============ -->
+        <section id="screen-stall" class="screen">
+          <header class="bg-navy px-4 py-3 border-b-[3px] border-accent flex items-center justify-between">
+            <div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Stall Detail</h1></div>
+            <div class="flex items-center gap-4"><button onclick="toast('🔗 Share stall')" class="tap"><i data-lucide="share-2" class="w-5 h-5 text-white"></i></button><button onclick="saveCurrent()" class="tap"><i data-lucide="bookmark" class="w-5 h-5 text-white"></i></button></div>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface">
+            <div class="relative h-[190px]">
+              <img id="stHero" class="ph w-full h-full object-cover" alt="">
+              <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,20,84,.5),transparent 55%)"></div>
+              <span id="stSectorBadge" class="absolute bottom-3 left-3 text-white text-[11px] font-bold px-3 py-1 rounded-full" style="background:#2d7a3a">FOOD</span>
+              <span id="stCodeBadge" class="absolute bottom-3 right-3 bg-navy/85 border border-white/30 text-white text-[11px] font-semibold px-3 py-1 rounded-full">TOI-A-012</span>
+            </div>
+            <div class="mx-4 -mt-8 relative bg-white rounded-2xl border border-line shadow-card p-4">
+              <div class="flex items-start gap-3">
+                <div id="stLogoBox" class="w-14 h-14 rounded-xl bg-white border border-line flex items-center justify-center p-1.5 shrink-0 overflow-hidden"></div>
+                <div class="flex-1 leading-tight">
+                  <p id="stName" class="font-r font-bold text-navy text-xl">Nutslane</p>
+                  <div class="flex items-center gap-1.5 mt-0.5"><div id="stStars" class="flex"></div><span id="stRating" class="text-[12px] font-bold text-navy">4.8</span><span id="stRev" class="text-[11px] text-muted">(124)</span></div>
+                  <p class="text-[13px] text-body flex items-center gap-1 mt-0.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> <span id="stState">Jammu &amp; Kashmir</span></p>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-gold/20 text-handi">MADE IN INDIA</span>
+                <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-agri/15 text-agri">BVM VERIFIED</span>
+                <span id="stZoneBadge" class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-navy/10 text-navy">TASTES OF INDIA</span>
+              </div>
+              <div class="mt-3 space-y-2">
+                <div class="border border-dashed border-line rounded-lg py-2 px-3 flex items-center gap-2 text-[13px] text-body"><i data-lucide="navigation" class="w-4 h-4 text-accent"></i> <span id="stLoc">Hall · TOI-A-012</span></div>
+                <div class="flex items-center gap-2 text-[12px] text-muted px-1"><i data-lucide="clock" class="w-4 h-4 text-accent"></i> <span id="stTimings">Open daily 10:00 AM – 7:00 PM</span></div>
+              </div>
+              <div class="flex gap-3 mt-3">
+                <button onclick="openEnquiry()" class="tap flex-1 bg-cta text-white font-r font-semibold text-base py-2.5 rounded-xl flex items-center justify-center gap-1.5"><i data-lucide="mail" class="w-4 h-4"></i> Enquire Now</button>
+                <button onclick="saveCurrent()" class="tap flex-1 border-2 border-navy text-navy font-r font-semibold text-base py-2.5 rounded-xl flex items-center justify-center gap-1.5"><i data-lucide="bookmark" class="w-4 h-4"></i> Save Stall</button>
+              </div>
+            </div>
+            <div id="stStats" class="grid grid-cols-2 gap-2 px-4 mt-4"></div>
+            <div class="px-4 mt-4"><p class="text-[11px] font-bold tracking-wider text-muted mb-2">CONNECT</p><div id="stSocials" class="flex flex-wrap gap-2"></div></div>
+            <div class="px-4 mt-5">
+              <h3 class="font-r font-semibold text-navy text-lg">About</h3>
+              <p id="stBlurb" class="text-[14px] text-body mt-1 leading-relaxed"></p>
+            </div>
+            <div class="flex items-center justify-between px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg">Products &amp; Catalogue</h3><button onclick="openDoc('catalogue')" class="tap text-[11px] font-bold tracking-wider text-accent flex items-center gap-1">VIEW CATALOGUE <i data-lucide="book-open" class="w-3.5 h-3.5"></i></button></div>
+            <div id="stProducts" class="grid grid-cols-2 gap-3 px-4 mt-3"></div>
+            <div class="px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg mb-2">Documents &amp; Downloads</h3><div id="stDocs" class="space-y-2"></div></div>
+            <div class="px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg mb-2">Certifications &amp; Compliance</h3><div id="stCerts" class="flex flex-wrap gap-2"></div></div>
+            <div class="px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg mb-2">Business Details</h3><div id="stBiz" class="rounded-xl border border-line overflow-hidden shadow-card"></div></div>
+            <div class="px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg mb-2">Gallery</h3><div id="stGallery" class="flex gap-2 overflow-x-auto noscroll pb-1"></div></div>
+            <div class="px-4 mt-5"><h3 class="font-r font-semibold text-navy text-lg mb-2">Visitor Reviews</h3><div id="stReviews" class="space-y-2"></div></div>
+            <div class="px-4 mt-5">
+              <h3 class="font-r font-semibold text-navy text-lg mb-2">Booth Enquiries</h3>
+              <div class="bg-white rounded-xl border border-line shadow-card p-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-navy/10 flex items-center justify-center"><i data-lucide="headset" class="w-5 h-5 text-navy"></i></div>
+                  <div class="leading-tight"><p class="font-r font-semibold text-navy text-base">BVM 2026 Secretariat</p><p class="text-[12px] text-muted">Exhibitor Help Desk</p></div>
+                </div>
+                <div class="mt-3 space-y-2 text-[13px]">
+                  <a class="tap flex items-center gap-2 text-body" onclick="toast('📞 Calling BVM helpline…')"><i data-lucide="phone" class="w-4 h-4 text-accent"></i> +91 96677 51132</a>
+                  <a class="tap flex items-center gap-2 text-body" onclick="toast('✉️ Compose email')"><i data-lucide="mail" class="w-4 h-4 text-accent"></i> contactus@bvm2026.com</a>
+                  <a class="tap flex items-center gap-2 text-body" onclick="toast('🌐 Open website')"><i data-lucide="globe" class="w-4 h-4 text-accent"></i> bharatiyavyaparmahotsav.com</a>
+                </div>
+              </div>
+            </div>
+            <h3 class="font-r font-semibold text-navy text-lg px-4 mt-5">More in this Sector</h3>
+            <div id="stRelated" class="flex gap-3 overflow-x-auto noscroll px-4 mt-3 pb-4"></div>
+          </div>
+          <div class="bottomnav" data-active="home"></div>
+        </section>
+
+        <!-- ============ 5 · PRODUCT DETAIL (dynamic) ============ -->
+        <section id="screen-product" class="screen">
+          <header class="bg-navy px-4 py-3 border-b-[3px] border-accent flex items-center justify-between">
+            <div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Product Detail</h1></div>
+            <div class="flex items-center gap-4"><button onclick="toast('🔗 Share product')" class="tap"><i data-lucide="share-2" class="w-5 h-5 text-white"></i></button><button onclick="saveCurrent()" class="tap"><i data-lucide="bookmark" class="w-5 h-5 text-white"></i></button></div>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface">
+            <img id="prdHero" class="ph w-full h-[220px] object-cover" alt="">
+            <div class="flex gap-2 px-4 mt-3" id="prdThumbs"></div>
+            <div class="px-4 mt-4">
+              <div class="flex gap-2">
+                <span id="prdSectorBadge" class="text-white text-[10px] font-bold px-2.5 py-1 rounded-full" style="background:#2d7a3a">FOOD</span>
+                <span class="bg-navy text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3"></i> CERTIFIED</span>
+              </div>
+              <h2 id="prdTitle" class="font-r font-bold text-navy text-2xl mt-2 leading-tight">Premium Almond Selection</h2>
+              <button onclick="openStall(currentEx.id)" class="tap text-[14px] text-body flex items-center gap-1 mt-0.5"><span id="prdSeller">Nutslane</span> <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+              <div class="bg-beige rounded-xl mt-3 p-4 flex">
+                <div class="flex-1"><p class="text-[10px] tracking-wider text-muted">PRICE RANGE</p><p id="prdPrice" class="font-r text-accent text-lg font-semibold mt-0.5">₹350 – ₹1,800 / kg</p></div>
+                <div class="w-px bg-[#c6c5d2] mx-3"></div>
+                <div class="flex-1"><p class="text-[10px] tracking-wider text-muted">MIN. ORDER</p><p id="prdMoq" class="font-r text-navy text-lg font-semibold mt-0.5">25 kg</p></div>
+              </div>
+              <h3 class="font-r font-semibold text-navy text-lg mt-5">Product Description</h3>
+              <p id="prdDesc" class="text-[14px] text-body mt-1 leading-relaxed"></p>
+              <div class="grid grid-cols-2 gap-2.5 mt-4">
+                <span class="border border-line rounded-lg py-2.5 px-3 text-[14px] text-body">🚚 Pan India</span>
+                <span class="border border-line rounded-lg py-2.5 px-3 text-[14px] text-body">🌍 Export Ready</span>
+                <span class="border border-line rounded-lg py-2.5 px-3 text-[14px] text-body">📦 Bulk Supply</span>
+                <span class="border border-line rounded-lg py-2.5 px-3 text-[14px] text-body">📄 GST Invoiced</span>
+              </div>
+              <button onclick="openEnquiry()" class="tap w-full bg-cta text-white font-r font-semibold text-lg py-3.5 rounded-xl mt-5 flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(254,107,0,.5)]"><i data-lucide="phone-call" class="w-5 h-5"></i> Enquire about this Product</button>
+              <button onclick="toast('📄 Downloading brochure…')" class="tap w-full border-2 border-navy text-navy font-r font-semibold text-lg py-3.5 rounded-xl mt-3 mb-4 flex items-center justify-center gap-2"><i data-lucide="download" class="w-5 h-5"></i> Download Brochure (PDF)</button>
+            </div>
+          </div>
+          <div class="bottomnav" data-active="home"></div>
+        </section>
+
+        <!-- ============ 6 · SEND ENQUIRY (dynamic summary) ============ -->
+        <section id="screen-enquiry" class="screen">
+          <header class="bg-navy px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Send Enquiry</h1></div>
+            <button onclick="goTo('notifications')" class="tap"><i data-lucide="bell" class="w-5 h-5 text-white"></i></button>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface px-4 py-4 space-y-4">
+            <div class="bg-white rounded-xl border border-line shadow-card p-3 flex items-center gap-3">
+              <div id="enqLogoBox" class="w-14 h-14 rounded-lg bg-white border border-line flex items-center justify-center p-1.5 overflow-hidden"></div>
+              <div class="leading-tight"><p id="enqName" class="font-r font-semibold text-navy text-lg">Nutslane</p><p class="text-[10px] font-bold tracking-wider text-muted flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> <span id="enqStall">STALL TOI-A-012</span></p></div>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-white rounded-lg border border-line px-3 py-2.5"><label class="text-[12px] text-muted">Full Name</label><input class="w-full outline-none text-[15px] text-ink bg-transparent" placeholder="Your name" /></div>
+              <div class="bg-white rounded-lg border border-line px-3 py-2.5"><label class="text-[12px] text-muted">Mobile Number</label><div class="flex items-center gap-2"><span class="text-[15px] text-body">+91</span><div class="w-px h-5 bg-line"></div><input inputmode="numeric" class="flex-1 outline-none text-[15px] text-ink bg-transparent" placeholder="00000 00000" /></div></div>
+              <div class="bg-white rounded-lg border border-line px-3 py-2.5"><label class="text-[12px] text-muted">Company Name</label><input class="w-full outline-none text-[15px] text-ink bg-transparent" placeholder="Your company" /></div>
+              <div class="bg-white rounded-lg border border-line px-3 py-2.5"><label class="text-[12px] text-muted">Message</label><textarea rows="4" class="w-full outline-none text-[15px] text-ink bg-transparent resize-none" placeholder="I'm interested in…"></textarea></div>
+              <label class="flex items-center gap-2.5 px-1 cursor-pointer"><input type="checkbox" class="w-5 h-5 rounded border-line accent-accent" /><span class="text-[14px] text-ink">Request callback from exhibitor</span></label>
+            </div>
+            <button onclick="sendEnquiry()" class="tap w-full bg-cta text-white font-r font-bold text-xl tracking-wide py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(254,107,0,.5)]"><i data-lucide="mail" class="w-5 h-5"></i> SEND ENQUIRY</button>
+            <p class="text-center text-[12px] italic text-muted">The exhibitor will receive your contact details and message instantly.</p>
+          </div>
+          <div class="bottomnav" data-active="home"></div>
+        </section>
+
+        <!-- ============ 7 · SAVED CONFIRMATION ============ -->
+        <section id="screen-saved-confirm" class="screen">
+          <header class="bg-navy px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Stall Saved</h1></div>
+            <button onclick="goTo('notifications')" class="tap"><i data-lucide="bell" class="w-5 h-5 text-white"></i></button>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll px-4 py-6" style="background:#FAF8F3">
+            <div class="flex flex-col items-center text-center mt-2">
+              <div class="w-20 h-20 rounded-full flex items-center justify-center shadow-[0_0_30px_-4px_rgba(45,122,58,.6)]" style="background:rgba(45,122,58,.12)"><div class="w-14 h-14 rounded-full bg-agri flex items-center justify-center"><i data-lucide="check" class="w-8 h-8 text-white"></i></div></div>
+              <h2 class="font-r font-semibold text-ink text-2xl mt-4">Stall Saved Successfully!</h2>
+              <p class="text-[14px] text-muted mt-1"><span id="scName">Nutslane</span> (<span id="scStall">Stall TOI-A-012</span>)<br/>has been added to your wishlist.</p>
+            </div>
+            <div class="space-y-3 mt-6">
+              <button onclick="reset('home')" class="tap w-full bg-accent text-white font-r font-semibold text-lg py-3 rounded-lg">Continue Browsing</button>
+              <button onclick="goTo('saved')" class="tap w-full border-2 border-navy text-navy font-r font-semibold text-lg py-3 rounded-lg">View Saved Stalls</button>
+            </div>
+            <div class="flex items-center justify-between mt-7"><h3 class="font-r font-semibold text-navy text-lg">Recommended for You</h3><button onclick="goTo('saved')" class="tap text-[11px] font-bold tracking-wider text-accent">VIEW ALL</button></div>
+            <div id="recRow" class="grid grid-cols-2 gap-3 mt-3"></div>
+          </div>
+          <div class="bottomnav" data-active="saved"></div>
+        </section>
+
+        <!-- ============ 8 · SAVED STALLS (dynamic) ============ -->
+        <section id="screen-saved" class="screen">
+          <header class="bg-navy px-4 py-3 border-b-[3px] border-accent flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-3xl tracking-tight">Saved Stalls</h1></header>
+          <div class="flex-1 overflow-y-auto noscroll px-4 py-4" style="background:#fbf9f4">
+            <h2 class="font-r font-semibold text-navy text-2xl">Saved Stalls</h2>
+            <p class="text-[15px] text-body"><span id="savedCount">4</span> items organized for your visit</p>
+            <div id="savedList" class="space-y-3 mt-4 pb-24"></div>
+          </div>
+          <div class="relative">
+            <div class="absolute -top-10 inset-x-0 h-10 bg-gradient-to-t from-[#fbf9f4] to-transparent pointer-events-none"></div>
+            <div class="px-4 pb-2 bg-[#fbf9f4]">
+              <p class="flex items-center gap-1 text-[10px] font-bold tracking-wider text-body mb-1.5"><i data-lucide="lock" class="w-3 h-3"></i> PRO FEATURE</p>
+              <button onclick="toast('⭐ Pro feature — upgrade to export PDF')" class="tap w-full bg-navy text-white font-r font-semibold text-lg py-3 rounded-xl flex items-center justify-center gap-2"><i data-lucide="file-down" class="w-5 h-5"></i> Export My List as PDF</button>
+            </div>
+          </div>
+          <div class="bottomnav" data-active="saved"></div>
+        </section>
+
+        <!-- ============ 9 · ZONES ============ -->
+        <section id="screen-zones" class="screen">
+          <header class="bg-navy px-4 py-3 border-b-[3px] border-accent flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Explore Zones</h1></header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface2">
+            <div class="bg-navy px-4 pb-4 pt-1"><p class="text-[11px] text-white/75">Bharat Mandapam · 12–15 August 2026</p><p class="font-r font-bold text-white text-2xl mt-1">8 Dedicated Zones</p><p class="text-[12px] text-white/70">Across 1,00,000+ sq.m of exhibition space</p></div>
+            <div class="h-1 tricolor"></div>
+            <div id="zoneGrid" class="grid grid-cols-2 gap-3 px-4 mt-4"></div>
+            <h2 class="font-r font-semibold text-navy text-xl px-4 mt-6">Browse by Sector</h2>
+            <p class="text-[12px] text-body px-4">Tap a sector to filter exhibitors</p>
+            <div id="sectorList" class="px-4 mt-3 pb-4 space-y-2"></div>
+          </div>
+          <div class="bottomnav" data-active="zones"></div>
+        </section>
+
+        <!-- ============ 10 · SCANNER ============ -->
+        <section id="screen-scanner" class="screen">
+          <div class="flex-1 relative bg-black flex flex-col">
+            <div class="flex items-center justify-between px-4 py-3 text-white"><button onclick="back()" class="tap"><i data-lucide="x" class="w-6 h-6"></i></button><span class="font-r font-semibold text-lg">Scan Stall QR</span><button onclick="toast('💡 Flash on')" class="tap"><i data-lucide="zap" class="w-5 h-5"></i></button></div>
+            <div class="flex-1 flex flex-col items-center justify-center px-8">
+              <div class="relative w-60 h-60">
+                <div class="absolute -top-1 -left-1 w-10 h-10 border-t-4 border-l-4 border-cta rounded-tl-2xl"></div>
+                <div class="absolute -top-1 -right-1 w-10 h-10 border-t-4 border-r-4 border-cta rounded-tr-2xl"></div>
+                <div class="absolute -bottom-1 -left-1 w-10 h-10 border-b-4 border-l-4 border-cta rounded-bl-2xl"></div>
+                <div class="absolute -bottom-1 -right-1 w-10 h-10 border-b-4 border-r-4 border-cta rounded-br-2xl"></div>
+                <div class="scanning absolute left-2 right-2 h-0.5 bg-cta shadow-[0_0_14px_3px_rgba(254,107,0,.85)]"></div>
+                <div class="absolute inset-6 flex items-center justify-center opacity-20"><i data-lucide="qr-code" class="w-28 h-28 text-white"></i></div>
+              </div>
+              <p class="text-white/80 text-center text-sm mt-8 leading-relaxed">Point your camera at a stall's QR code<br/>to open the exhibitor instantly.</p>
+            </div>
+            <div class="px-6 pb-8 space-y-3">
+              <div class="flex gap-2">
+                <input id="scanCode" placeholder="Enter stall code e.g. B2B-A-050" class="flex-1 bg-white/10 text-white placeholder:text-white/40 rounded-lg px-3 py-3 text-sm outline-none border border-white/20" />
+                <button onclick="scanManual()" class="tap bg-cta text-white font-r font-semibold px-5 rounded-lg">Go</button>
+              </div>
+              <button onclick="scanSim()" class="tap w-full bg-white text-navy font-r font-semibold text-lg py-3 rounded-xl flex items-center justify-center gap-2"><i data-lucide="scan-line" class="w-5 h-5"></i> Simulate a Scan</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ 11 · NOTIFICATIONS ============ -->
+        <section id="screen-notifications" class="screen">
+          <header class="bg-navy px-4 py-3 flex items-center justify-between"><div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><h1 class="font-r font-bold text-white text-2xl">Notifications</h1></div><button onclick="markAllRead()" class="tap text-[11px] font-bold text-white/80 tracking-wide">MARK ALL READ</button></header>
+          <div class="flex-1 overflow-y-auto noscroll bg-surface">
+            <div id="notifList"></div>
+          </div>
+          <div class="bottomnav" data-active="home"></div>
+        </section>
+
+        <!-- ============ 12 · PROFILE ============ -->
+        <section id="screen-profile" class="screen">
+          <div class="flex-1 overflow-y-auto noscroll bg-surface2">
+            <div class="bg-navy px-4 pt-3 pb-7 border-b-[3px] border-gold">
+              <div class="flex items-center justify-between"><h1 class="font-r font-bold text-white text-2xl">Profile</h1><button onclick="toast('⚙️ Settings')" class="tap"><i data-lucide="settings" class="w-5 h-5 text-white"></i></button></div>
+              <div class="flex items-center gap-3 mt-4">
+                <div class="w-16 h-16 rounded-full bg-cta flex items-center justify-center text-white font-r font-bold text-2xl ring-2 ring-gold/40">AS</div>
+                <div class="leading-tight"><p class="font-r font-bold text-white text-xl">Aarav Sharma</p><p class="text-[13px] text-white/70">Procurement Head · Sharma Trading Co.</p><span class="inline-flex items-center gap-1 mt-1 bg-white/15 text-white text-[10px] font-bold px-2 py-0.5 rounded-full"><i data-lucide="badge-check" class="w-3 h-3"></i> VERIFIED VISITOR</span></div>
+              </div>
+            </div>
+            <div class="mx-4 -mt-4 bg-white rounded-2xl border border-line shadow-card p-4 flex items-center gap-4">
+              <div class="flex-1"><p class="text-[10px] font-bold tracking-wider text-muted">VISITOR PASS</p><p class="font-r font-bold text-navy text-lg">BVM-2026-V-04821</p><p class="text-[12px] text-body">12–15 Aug · All-Zones Access</p><span class="inline-block mt-1.5 bg-agri/15 text-agri text-[10px] font-bold px-2 py-0.5 rounded-full">● ACTIVE</span></div>
+              <div class="w-[72px] h-[72px] bg-white rounded-lg border border-line flex items-center justify-center overflow-hidden"><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&margin=0&data=BVM-2026-V-04821" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full bg-navy text-white flex items-center justify-center font-r font-bold&quot;>QR</div>'" alt="Visitor QR"></div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 px-4 mt-4">
+              <div class="bg-white rounded-xl border border-line p-3 text-center"><p id="pfSaved" class="font-r font-bold text-navy text-2xl">4</p><p class="text-[10px] text-muted font-bold tracking-wider">SAVED</p></div>
+              <div class="bg-white rounded-xl border border-line p-3 text-center"><p class="font-r font-bold text-navy text-2xl">3</p><p class="text-[10px] text-muted font-bold tracking-wider">ENQUIRIES</p></div>
+              <div class="bg-white rounded-xl border border-line p-3 text-center"><p class="font-r font-bold text-navy text-2xl">2</p><p class="text-[10px] text-muted font-bold tracking-wider">MEETINGS</p></div>
+            </div>
+            <div class="px-4 mt-5 space-y-2 pb-5" id="profileMenu"></div>
+          </div>
+          <div class="bottomnav" data-active="profile"></div>
+        </section>
+
+      </div>
+
+      <div id="toast" class="absolute left-1/2 -translate-x-1/2 bottom-24 z-[60] opacity-0 pointer-events-none bg-ink text-white text-[13px] font-medium px-4 py-2.5 rounded-full shadow-lg max-w-[88%] text-center"></div>
+    </div>
+  </div>
+
+  <div class="mt-5 text-center">
+    <p class="text-white/80 font-r text-lg tracking-wide">Bharatiya Vyapar Mahotsav 2026 — Interactive Demo</p>
+    <p class="text-white/40 text-xs mt-0.5">Functional: type an OTP, search &amp; filter exhibitors, save stalls. Or jump to a screen:</p>
+    <div id="jumper" class="flex flex-wrap items-center justify-center gap-1.5 mt-2.5 max-w-[520px]"></div>
+  </div>
+
+<script>
+  const ORIGIN = 'https://bharatiyavyaparmahotsav.com';
+  const logo = p => ORIGIN + '/' + p.replace(/ /g,'%20');
+  function icons(){ if (window.lucide) lucide.createIcons(); }
+  // unified logo: real BVM logo image, or a monogram tile for brands without a hosted logo
+  function logoInner(e){
+    if (e.logo) return `<img src="${logo(e.logo)}" class="max-h-full max-w-full object-contain" onerror="this.style.display='none'" alt="${e.name}">`;
+    const s = SM[e.sector] || {color:'#001454'};
+    const ini = e.name.split(/\s+/).filter(w=>/[A-Za-z0-9]/.test(w[0]||'')).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+    return `<div class="w-full h-full rounded-md flex items-center justify-center" style="background:linear-gradient(135deg,${s.color},${s.color}bb)"><span class="font-r font-bold text-white text-lg leading-none">${ini}</span></div>`;
+  }
+  function hash(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h%9999; }
+  function setPhoto(el, kw, seed){
+    if(!el) return;
+    el.onerror = function(){ this.onerror=null; this.src='https://picsum.photos/seed/'+encodeURIComponent(seed)+'/600/400'; };
+    el.src = 'https://loremflickr.com/600/400/'+encodeURIComponent(kw)+'?lock='+hash(seed);
+  }
+  function loadPhotos(){
+    document.querySelectorAll('img.ph[data-kw]').forEach(im=>{
+      if (im.dataset.loaded) return; im.dataset.loaded='1';
+      setPhoto(im, im.dataset.kw, im.dataset.seed||im.dataset.kw);
+    });
+  }
+
+  /* ---------- DATA: sectors + real exhibitors ---------- */
+  const SECTORS = [
+    {key:'all',          label:'All',                short:'ALL',       color:'#001454'},
+    {key:'food',         label:'Food & Agri',        short:'FOOD',      color:'#2d7a3a'},
+    {key:'consumer',     label:'Consumer & Retail',  short:'RETAIL',    color:'#c2410c'},
+    {key:'auto',         label:'Auto & EV',          short:'AUTO',      color:'#1a6baa'},
+    {key:'finance',      label:'Finance',            short:'FINANCE',   color:'#2aa68a'},
+    {key:'realestate',   label:'Real Estate',        short:'REALTY',    color:'#6b4c9a'},
+    {key:'energy',       label:'Green Energy',       short:'ENERGY',    color:'#15803d'},
+    {key:'logistics',    label:'Logistics',          short:'LOGISTICS', color:'#0e7490'},
+    {key:'engineering',  label:'Engineering',        short:'ENGG',      color:'#475569'},
+    {key:'jewellery',    label:'Jewellery',          short:'JEWEL',     color:'#c8960c'},
+    {key:'manufacturing',label:'Manufacturing',      short:'MFG',       color:'#b45309'},
+    {key:'textiles',     label:'Textiles & Handloom',short:'TEXTILE',   color:'#9d174d'},
+    {key:'handicraft',   label:'Handicrafts',        short:'CRAFTS',    color:'#9a3412'},
+    {key:'wellness',     label:'Ayush & Wellness',   short:'AYUSH',     color:'#0d9488'},
+    {key:'pharma',       label:'Pharma & Health',    short:'PHARMA',    color:'#0369a1'},
+    {key:'it',           label:'IT & Electronics',   short:'TECH',      color:'#4338ca'},
+    {key:'tourism',      label:'Tourism',            short:'TOURISM',   color:'#7c3aed'},
+    {key:'toys',         label:'Toys & Games',       short:'TOYS',      color:'#db2777'},
+  ];
+  const SM = Object.fromEntries(SECTORS.map(s=>[s.key,s]));
+
+  const EXHIBITORS = [
+    {id:'nutslane', name:'Nutslane', logo:'images/exhibitors/nutslane.png', sector:'food', zone:'Tastes of India', state:'Jammu & Kashmir', stall:'Stall TOI-A-012', photo:'dryfruits,nuts', featured:true,
+      blurb:'Premium Himalayan dry fruits, nuts and gourmet trail mixes sourced direct from growers across the Kashmir valley.',
+      product:{name:'Premium Almond Selection', price:'₹350 – ₹1,800 / kg', moq:'25 kg', kw:'almonds,nuts'}},
+    {id:'dhanuka', name:'Dhanuka Agritech', logo:'images/sponsors/dhanuka.png', sector:'food', zone:'Business to Business', state:'Rajasthan', stall:'Stall B2B-A-204', photo:'agriculture,field',
+      blurb:'Crop-protection and agrochemical solutions trusted by 6.9 million Indian farmers, with a nationwide distribution network.',
+      product:{name:'Crop Protection Range', price:'₹250 – ₹2,400', moq:'100 units', kw:'farm,crop'}},
+    {id:'amore', name:'Amore Gelato', logo:'images/sponsors/amore.png', sector:'food', zone:'Tastes of India', state:'Maharashtra', stall:'Stall TOI-B-031', photo:'gelato,icecream',
+      blurb:'Artisanal Italian-style gelato and frozen desserts, handcrafted in India with natural ingredients.',
+      product:{name:'Artisan Gelato Tubs', price:'₹180 – ₹650', moq:'50 tubs', kw:'gelato,dessert'}},
+    {id:'bonnaraoo', name:'Bonnaraoo', logo:'images/sponsors/Bonnaraoo.png', sector:'food', zone:'Tastes of India', state:'Karnataka', stall:'Stall TOI-C-018', photo:'coffee,beans',
+      blurb:'Specialty coffee and natural beverages crafted from single-origin Indian estates.',
+      product:{name:'Single-Origin Coffee', price:'₹400 – ₹1,200', moq:'30 kg', kw:'coffee,cup'}},
+    {id:'kendriya', name:'Kendriya Bhandar', logo:'images/sponsors/kendriya-bhandar.png', sector:'consumer', zone:'Business to Business', state:'Delhi', stall:'Stall B2B-D-101', photo:'grocery,store',
+      blurb:"India's largest central-government consumer cooperative — groceries, staples and everyday FMCG essentials.",
+      product:{name:'Daily Essentials Range', price:'₹20 – ₹900', moq:'200 units', kw:'grocery,shelf'}},
+    {id:'kent', name:'Kent RO', logo:'images/sponsors/Kent.png', sector:'consumer', zone:'Business to Business', state:'Uttar Pradesh', stall:'Stall B2B-C-077', photo:'water,purifier', featured:true,
+      blurb:"Water purifiers, air purifiers and smart home appliances powered by Kent's patented Mineral RO Technology.",
+      product:{name:'Mineral RO Purifier', price:'₹12,000 – ₹28,000', moq:'10 units', kw:'appliance,kitchen'}},
+    {id:'kuhl', name:'Kuhl', logo:'images/sponsors/kuhl.png', sector:'consumer', zone:'Business to Business', state:'Punjab', stall:'Stall B2B-C-090', photo:'fan,ceiling',
+      blurb:'Energy-efficient BLDC fans, coolers and ventilation systems engineered and made in India.',
+      product:{name:'BLDC Ceiling Fans', price:'₹2,200 – ₹6,500', moq:'25 units', kw:'fan,interior'}},
+    {id:'unominda', name:'Uno Minda', logo:'images/sponsors/uno-minda.png', sector:'auto', zone:'Business to Business', state:'Haryana', stall:'Stall B2B-A-045', photo:'car,parts',
+      blurb:'Automotive components and systems — switches, lighting and acoustics — supplied to global OEMs.',
+      product:{name:'Auto Lighting Systems', price:'₹500 – ₹9,000', moq:'100 units', kw:'headlight,car'}},
+    {id:'sona', name:'Sona Comstar', logo:'images/sponsors/sona-comstar.png', sector:'auto', zone:'Business to Business', state:'Haryana', stall:'Stall B2B-A-050', photo:'ev,motor', featured:true,
+      blurb:'Precision driveline systems and EV traction motors powering the global mobility revolution.',
+      product:{name:'EV Traction Motor', price:'₹18,000 – ₹95,000', moq:'20 units', kw:'electric,engine'}},
+    {id:'porter', name:'Porter', logo:'images/sponsors/Porter.png', sector:'logistics', zone:'Business to Business', state:'Karnataka', stall:'Stall B2B-E-066', photo:'truck,delivery',
+      blurb:'Intra-city logistics and on-demand goods transport for businesses of every size.',
+      product:{name:'Fleet Logistics Plans', price:'On request', moq:'Custom', kw:'logistics,truck'}},
+    {id:'inlog', name:'Inlog', logo:'images/sponsors/Inlog.png', sector:'logistics', zone:'Business to Business', state:'Maharashtra', stall:'Stall B2B-E-072', photo:'warehouse,storage',
+      blurb:'End-to-end supply chain, warehousing and fulfilment technology for modern trade.',
+      product:{name:'Warehousing Solutions', price:'On request', moq:'Custom', kw:'warehouse,boxes'}},
+    {id:'shriram', name:'Shriram Finance', logo:'images/sponsors/Shriram Fin.png', sector:'finance', zone:'Investment & Finance', state:'Tamil Nadu', stall:'Stall FIN-A-008', photo:'finance,office', featured:true,
+      blurb:"Vehicle, MSME and small-business finance from one of India's largest retail NBFCs.",
+      product:{name:'MSME Loan Products', price:'₹50K – ₹50L', moq:'Custom', kw:'bank,money'}},
+    {id:'credora', name:'Credora', logo:'images/associate-partners/Credora.png', sector:'finance', zone:'Investment & Finance', state:'Delhi', stall:'Stall FIN-B-015', photo:'investment,chart',
+      blurb:'MSME credit, advisory and trade-finance facilitation for fast-growing enterprises.',
+      product:{name:'Trade Finance', price:'On request', moq:'Custom', kw:'finance,growth'}},
+    {id:'signature', name:'Signature Global', logo:'images/sponsors/signature-global.png', sector:'realestate', zone:'Investment & Finance', state:'Haryana', stall:'Stall RE-A-002', photo:'building,city', featured:true,
+      blurb:"India's leading affordable and mid-housing real-estate developer, with projects across Delhi-NCR.",
+      product:{name:'Housing Projects', price:'₹25L – ₹2.5Cr', moq:'Custom', kw:'apartment,building'}},
+    {id:'dasnac', name:'Dasnac', logo:'images/exhibitors/logo-dasnac.png', sector:'realestate', zone:'Investment & Finance', state:'Uttar Pradesh', stall:'Stall RE-B-009', photo:'commercial,building',
+      blurb:'Commercial and residential developments across the Delhi-NCR region.',
+      product:{name:'Commercial Spaces', price:'On request', moq:'Custom', kw:'office,tower'}},
+    {id:'urja', name:'Urja Global', logo:'images/exhibitors/urja-global.png', sector:'energy', zone:'Outdoor Exhibition', state:'Delhi', stall:'Stall ENR-A-003', photo:'solar,panel', featured:true,
+      blurb:'Solar power, lithium batteries and EV-charging infrastructure for a green Bharat.',
+      product:{name:'Solar + Storage Kits', price:'₹40K – ₹3L', moq:'5 units', kw:'solar,energy'}},
+    {id:'helpusgreen', name:'Help Us Green', logo:'images/exhibitors/help-us-green.png', sector:'energy', zone:'Women & Youth', state:'Uttar Pradesh', stall:'Stall WY-A-011', photo:'flowers,incense',
+      blurb:'Flowercycling temple waste into incense and biodegradable products — the original circular-economy startup.',
+      product:{name:'Florafoam & Incense', price:'₹120 – ₹800', moq:'50 units', kw:'incense,flowers'}},
+    {id:'bossard', name:'Bossard', logo:'images/exhibitors/bossard.png', sector:'engineering', zone:'Business to Business', state:'Maharashtra', stall:'Stall B2B-B-033', photo:'factory,industry',
+      blurb:'Fastening technology, smart-factory logistics and engineering expertise for manufacturers.',
+      product:{name:'Fastening Solutions', price:'₹50 – ₹5,000', moq:'500 units', kw:'bolts,fasteners'}},
+    {id:'pcj', name:'PC Jeweller', logo:'images/sponsors/pcj.png', sector:'jewellery', zone:'Business to Business', state:'Delhi', stall:'Stall B2B-F-021', photo:'jewellery,gold',
+      blurb:'Hallmarked gold, diamond and silver jewellery with timeless Indian craftsmanship.',
+      product:{name:'Gold & Diamond Sets', price:'₹15K – ₹15L', moq:'1 unit', kw:'gold,jewelry'}},
+    {id:'galaxy', name:'Galaxy Surfactants', logo:'images/sponsors/galaxy.png', sector:'manufacturing', zone:'Business to Business', state:'Maharashtra', stall:'Stall B2B-B-040', photo:'chemical,laboratory',
+      blurb:'Specialty chemicals and surfactants for home and personal-care brands worldwide.',
+      product:{name:'Specialty Surfactants', price:'On request', moq:'1 ton', kw:'chemistry,lab'}},
+    {id:'rajdeep', name:'Rajdeep', logo:'images/sponsors/rajdeep.png', sector:'manufacturing', zone:'Business to Business', state:'Gujarat', stall:'Stall B2B-B-052', photo:'industry,machine',
+      blurb:'Industrial manufacturing and engineered products for infrastructure projects.',
+      product:{name:'Engineered Components', price:'On request', moq:'Custom', kw:'machine,factory'}},
+    {id:'swaastik', name:'Swaastik Trading', logo:'images/sponsors/Swaastik Trading.png', sector:'consumer', zone:'Business to Business', state:'Delhi', stall:'Stall B2B-D-118', photo:'wholesale,store',
+      blurb:'Multi-category trading and distribution across fast-moving consumer goods.',
+      product:{name:'Wholesale Catalogue', price:'On request', moq:'Custom', kw:'wholesale,shop'}},
+    {id:'fabindia', name:'Fabindia', logo:null, sector:'textiles', zone:'Women & Youth', state:'Delhi', stall:'Stall WY-B-007', photo:'handloom,textile', featured:true,
+      blurb:'Handcrafted garments, home textiles and artisanal products sourced from rural craft clusters across India.',
+      product:{name:'Handloom Apparel', price:'₹600 – ₹6,000', moq:'100 pcs', kw:'kurta,fabric'}},
+    {id:'raymond', name:'Raymond', logo:null, sector:'textiles', zone:'Business to Business', state:'Maharashtra', stall:'Stall B2B-G-014', photo:'fabric,suit',
+      blurb:'World-class worsted suiting, fabrics and apparel — a complete textile and lifestyle house.',
+      product:{name:'Premium Suiting Fabric', price:'₹450 – ₹2,500 / m', moq:'200 m', kw:'fabric,tailor'}},
+    {id:'jaipurrugs', name:'Jaipur Rugs', logo:null, sector:'handicraft', zone:'Women & Youth', state:'Rajasthan', stall:'Stall WY-C-022', photo:'carpet,rug',
+      blurb:'Hand-knotted carpets and rugs woven by 40,000+ rural artisans — reviving traditional Indian craft.',
+      product:{name:'Hand-Knotted Carpets', price:'₹8,000 – ₹2L', moq:'10 units', kw:'carpet,handmade'}},
+    {id:'channapatna', name:'Channapatna Crafts', logo:null, sector:'handicraft', zone:'Tourism & Culture', state:'Karnataka', stall:'Stall TC-A-008', photo:'wooden,toys',
+      blurb:'GI-tagged lacquered wooden toys and handicrafts from the famed Toy Town of Karnataka.',
+      product:{name:'Lacquered Wooden Toys', price:'₹150 – ₹2,000', moq:'50 units', kw:'wooden,craft'}},
+    {id:'patanjali', name:'Patanjali Ayurved', logo:null, sector:'wellness', zone:'Tastes of India', state:'Uttarakhand', stall:'Stall TOI-D-040', photo:'ayurveda,herbal', featured:true,
+      blurb:'Ayurvedic FMCG, herbal foods and wellness products — one of India’s fastest-growing consumer brands.',
+      product:{name:'Ayurvedic Wellness Range', price:'₹40 – ₹800', moq:'200 units', kw:'herbal,ayurveda'}},
+    {id:'dabur', name:'Dabur India', logo:null, sector:'wellness', zone:'Business to Business', state:'Uttar Pradesh', stall:'Stall B2B-G-031', photo:'ayurveda,honey',
+      blurb:'150-year-old Ayurvedic and natural healthcare company — from Chyawanprash to honey and personal care.',
+      product:{name:'Ayurvedic Healthcare', price:'₹50 – ₹600', moq:'200 units', kw:'honey,herbal'}},
+    {id:'himalaya', name:'Himalaya Wellness', logo:null, sector:'wellness', zone:'Tastes of India', state:'Karnataka', stall:'Stall TOI-D-052', photo:'herbal,cosmetic',
+      blurb:'Herbal personal care, nutraceuticals and wellness products backed by clinical research.',
+      product:{name:'Herbal Personal Care', price:'₹80 – ₹900', moq:'150 units', kw:'cream,herbal'}},
+    {id:'cipla', name:'Cipla', logo:null, sector:'pharma', zone:'Business to Business', state:'Maharashtra', stall:'Stall B2B-H-006', photo:'medicine,pharma',
+      blurb:'Global pharmaceutical leader in respiratory, oncology and affordable generic medicines.',
+      product:{name:'Generic Formulations', price:'On request', moq:'Custom', kw:'medicine,pills'}},
+    {id:'infosys', name:'Infosys', logo:null, sector:'it', zone:'Skilling & Training', state:'Karnataka', stall:'Stall ST-A-003', photo:'technology,office', featured:true,
+      blurb:'Global leader in next-gen digital services, cloud, AI and enterprise consulting.',
+      product:{name:'Enterprise Digital Suite', price:'On request', moq:'Custom', kw:'software,server'}},
+    {id:'boat', name:'boAt Lifestyle', logo:null, sector:'it', zone:'Women & Youth', state:'Delhi', stall:'Stall WY-D-018', photo:'earphones,gadget',
+      blurb:'India’s #1 audio-wearables brand — earphones, smartwatches and lifestyle electronics.',
+      product:{name:'Audio & Wearables', price:'₹999 – ₹9,999', moq:'100 units', kw:'headphone,smartwatch'}},
+    {id:'taj', name:'Taj Hotels', logo:null, sector:'tourism', zone:'Tourism & Culture', state:'Maharashtra', stall:'Stall TC-B-001', photo:'hotel,luxury',
+      blurb:'Iconic Indian luxury hospitality — palaces, resorts and curated destination experiences.',
+      product:{name:'MICE & Destination Stays', price:'On request', moq:'Custom', kw:'resort,hotel'}},
+    {id:'incredibleindia', name:'Incredible India', logo:null, sector:'tourism', zone:'Tourism & Culture', state:'Delhi', stall:'Stall TC-C-010', photo:'india,heritage',
+      blurb:'State tourism boards showcasing heritage circuits, eco-tourism and cultural experiences.',
+      product:{name:'Holiday Circuits', price:'₹8K – ₹2L', moq:'Custom', kw:'travel,temple'}},
+    {id:'funskool', name:'Funskool India', logo:null, sector:'toys', zone:'Women & Youth', state:'Tamil Nadu', stall:'Stall WY-E-027', photo:'toys,games',
+      blurb:'Educational toys, board games and learning products made in India for kids of all ages.',
+      product:{name:'Educational Toys & Games', price:'₹150 – ₹2,500', moq:'100 units', kw:'toys,board'}},
+    {id:'titan', name:'Titan Company', logo:null, sector:'jewellery', zone:'Business to Business', state:'Tamil Nadu', stall:'Stall B2B-F-033', photo:'watch,jewellery',
+      blurb:'Watches, jewellery (Tanishq) and eyewear — design-led lifestyle products trusted across India.',
+      product:{name:'Watches & Jewellery', price:'₹1,500 – ₹5L', moq:'10 units', kw:'watch,gold'}},
+    {id:'haldirams', name:'Haldiram’s', logo:null, sector:'food', zone:'Tastes of India', state:'Delhi', stall:'Stall TOI-E-061', photo:'snacks,namkeen',
+      blurb:'India’s favourite namkeen, sweets and packaged snacks — authentic taste at scale.',
+      product:{name:'Namkeen & Sweets', price:'₹30 – ₹600', moq:'200 units', kw:'snacks,sweets'}},
+  ];
+  const byId = id => EXHIBITORS.find(e=>e.id===id);
+
+  // ---- enrichment: per-company business meta (best-effort real websites + plausible firmographics) ----
+  const META = {
+    nutslane:{web:'nutslane.com', founded:2015, staff:'50–200', exports:'UAE · USA · UK', rating:4.8, reviews:124},
+    dhanuka:{web:'dhanuka.com', founded:1980, staff:'5000+', exports:'Africa · SE Asia', rating:4.6, reviews:212},
+    amore:{web:'amoregelato.com', founded:2014, staff:'200–500', exports:'Middle East', rating:4.7, reviews:98},
+    bonnaraoo:{web:'bonnaraoo.com', founded:2018, staff:'10–50', exports:'India', rating:4.5, reviews:41},
+    kendriya:{web:'kendriyabhandar.gov.in', founded:1963, staff:'2000+', exports:'India', rating:4.4, reviews:330},
+    kent:{web:'kent.co.in', founded:1999, staff:'2000+', exports:'GCC · Africa', rating:4.7, reviews:540},
+    kuhl:{web:'kuhl.in', founded:2008, staff:'500–1000', exports:'Nepal · Bhutan', rating:4.5, reviews:87},
+    unominda:{web:'unominda.com', founded:1958, staff:'25000+', exports:'Global OEMs', rating:4.8, reviews:276},
+    sona:{web:'sonacomstar.com', founded:1995, staff:'5000+', exports:'USA · EU · China', rating:4.9, reviews:189},
+    porter:{web:'porter.in', founded:2014, staff:'5000+', exports:'India', rating:4.6, reviews:402},
+    inlog:{web:'inlog.in', founded:2016, staff:'200–500', exports:'India', rating:4.4, reviews:63},
+    shriram:{web:'shriramfinance.in', founded:1979, staff:'70000+', exports:'India', rating:4.6, reviews:610},
+    credora:{web:'credora.in', founded:2019, staff:'50–200', exports:'India', rating:4.5, reviews:54},
+    signature:{web:'signatureglobal.in', founded:2014, staff:'1000–5000', exports:'India', rating:4.7, reviews:271},
+    dasnac:{web:'dasnac.com', founded:2010, staff:'200–500', exports:'India', rating:4.4, reviews:88},
+    urja:{web:'urjaglobal.in', founded:1992, staff:'200–500', exports:'Africa · SAARC', rating:4.5, reviews:120},
+    helpusgreen:{web:'helpusgreen.com', founded:2015, staff:'50–200', exports:'EU · USA', rating:4.8, reviews:156},
+    bossard:{web:'bossard.com', founded:1831, staff:'3000+', exports:'Global', rating:4.7, reviews:143},
+    pcj:{web:'pcjeweller.com', founded:2005, staff:'2000+', exports:'GCC · USA', rating:4.5, reviews:298},
+    galaxy:{web:'galaxysurfactants.com', founded:1986, staff:'1000–5000', exports:'70+ countries', rating:4.7, reviews:175},
+    rajdeep:{web:'rajdeepgroup.in', founded:1995, staff:'500–1000', exports:'Middle East', rating:4.4, reviews:72},
+    swaastik:{web:'swaastiktrading.com', founded:2009, staff:'50–200', exports:'India', rating:4.3, reviews:49},
+    fabindia:{web:'fabindia.com', founded:1960, staff:'2000+', exports:'USA · EU · GCC', rating:4.7, reviews:410},
+    raymond:{web:'raymond.in', founded:1925, staff:'10000+', exports:'55+ countries', rating:4.6, reviews:288},
+    jaipurrugs:{web:'jaipurrugs.com', founded:1978, staff:'40000+', exports:'USA · EU', rating:4.8, reviews:132},
+    channapatna:{web:'kacrafts.in', founded:1995, staff:'200–500', exports:'EU · Japan', rating:4.6, reviews:74},
+    patanjali:{web:'patanjaliayurved.net', founded:2006, staff:'10000+', exports:'GCC · Africa', rating:4.5, reviews:520},
+    dabur:{web:'dabur.com', founded:1884, staff:'8000+', exports:'100+ countries', rating:4.7, reviews:466},
+    himalaya:{web:'himalayawellness.in', founded:1930, staff:'5000+', exports:'90+ countries', rating:4.7, reviews:301},
+    cipla:{web:'cipla.com', founded:1935, staff:'25000+', exports:'80+ countries', rating:4.8, reviews:357},
+    infosys:{web:'infosys.com', founded:1981, staff:'300000+', exports:'Global', rating:4.8, reviews:612},
+    boat:{web:'boat-lifestyle.com', founded:2016, staff:'500–1000', exports:'SAARC · GCC', rating:4.6, reviews:540},
+    taj:{web:'tajhotels.com', founded:1903, staff:'25000+', exports:'Global', rating:4.9, reviews:489},
+    incredibleindia:{web:'incredibleindia.org', founded:2002, staff:'Govt', exports:'Global', rating:4.6, reviews:215},
+    funskool:{web:'funskool.com', founded:1987, staff:'500–1000', exports:'40+ countries', rating:4.5, reviews:160},
+    titan:{web:'titancompany.in', founded:1984, staff:'7000+', exports:'GCC · SE Asia', rating:4.8, reviews:398},
+    haldirams:{web:'haldirams.com', founded:1937, staff:'5000+', exports:'50+ countries', rating:4.7, reviews:430},
+  };
+  EXHIBITORS.forEach(e=>{ const m=META[e.id]||{}; e.web=m.web||(e.id+'.com'); e.founded=m.founded||2012; e.staff=m.staff||'50–200'; e.exports=m.exports||'India'; e.rating=m.rating||4.6; e.reviews=m.reviews||80; });
+
+  /* ---------- router ---------- */
+  const SCREENS = ['splash','login','home','stall','product','enquiry','saved-confirm','saved','zones','scanner','notifications','profile'];
+  let stack = ['splash'];
+  const curr = () => stack[stack.length-1];
+  function paint(){
+    SCREENS.forEach(id=>document.getElementById('screen-'+id).classList.toggle('active', id===curr()));
+    const v = document.getElementById('screen-'+curr()).querySelector('.overflow-y-auto'); if (v) v.scrollTop=0;
+    document.querySelectorAll('#jumper [data-jump]').forEach(b=>{
+      const on=b.dataset.jump===curr();
+      b.classList.toggle('bg-cta',on); b.classList.toggle('text-white',on);
+      b.classList.toggle('bg-white/10',!on); b.classList.toggle('text-white/70',!on);
+    });
+    const cs=curr(); if(cs==='zones')renderZones(); else if(cs==='notifications')renderNotifications(); else if(cs==='profile')renderProfile();
+    buildNavs(); icons();
+  }
+  function goTo(id){ if (id!==curr()) stack.push(id); paint(); }
+  function back(){ if (stack.length>1) stack.pop(); paint(); }
+  function reset(id){ stack=[id]; paint(); }
+
+  /* ---------- bottom nav ---------- */
+  function buildNavs(){ document.querySelectorAll('.bottomnav').forEach(s=>s.innerHTML=navMarkup(s.dataset.active)); }
+  function navItem(id,label,icon,target,active){
+    const col = id===active ? 'text-accent':'text-muted';
+    return `<button onclick="${target}" class="tap flex flex-col items-center gap-0.5 ${col}"><i data-lucide="${icon}" class="w-5 h-5"></i><span class="text-[10px] font-bold tracking-wide">${label}</span></button>`;
+  }
+  function navMarkup(active){
+    return `<div class="relative bg-white border-t border-line shadow-nav h-[64px] flex items-center justify-around px-2">
+      ${navItem('home','Home','home',"reset('home')",active)}
+      ${navItem('zones','Zones','grid-2x2',"goTo('zones')",active)}
+      <button onclick="goTo('scanner')" class="tap -mt-8 w-14 h-14 rounded-full bg-cta flex flex-col items-center justify-center shadow-[0_8px_18px_-4px_rgba(160,65,0,.6)] ring-4 ring-white"><i data-lucide="scan-line" class="w-6 h-6 text-white"></i></button>
+      ${navItem('saved','Saved','heart',"goTo('saved')",active)}
+      ${navItem('profile','Profile','user',"goTo('profile')",active)}
+    </div>`;
+  }
+
+  /* ---------- toast ---------- */
+  let toastT;
+  function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.opacity='1'; t.style.transform='translate(-50%,-6px)'; clearTimeout(toastT); toastT=setTimeout(()=>{t.style.opacity='0'; t.style.transform='translate(-50%,0)';},2100); }
+
+  /* ---------- home: chips + search + featured + grid ---------- */
+  let activeSector = 'all';
+  function renderChips(){
+    document.getElementById('chips').innerHTML = SECTORS.map(s=>{
+      const on=s.key===activeSector;
+      return `<button class="tap shrink-0 px-4 py-2 rounded-full text-[13px] font-medium ${on?'text-white':'bg-white text-body border border-line'}" style="${on?('background:'+s.color):''}" onclick="setSector('${s.key}')">${s.label}</button>`;
+    }).join('');
+  }
+  function setSector(k){ activeSector=k; renderChips(); renderGrid(); }
+  function clearSearch(){ const i=document.getElementById('searchInput'); i.value=''; renderGrid(); i.focus(); }
+
+  function gridCard(e){
+    const s=SM[e.sector];
+    return `<div onclick="openStall('${e.id}')" class="tap bg-white rounded-2xl border border-line overflow-hidden shadow-card">
+      <div class="relative h-24 logoimg flex items-center justify-center p-3 border-b border-line overflow-hidden">
+        ${logoInner(e)}
+        <span class="absolute top-2 left-2 text-white text-[8px] font-bold px-2 py-0.5 rounded-full" style="background:${s.color}">${s.short}</span>
+        <button onclick="event.stopPropagation();toggleSave('${e.id}',this)" class="absolute top-2 right-2 w-6 h-6 bg-surface2 rounded-full flex items-center justify-center"><i data-lucide="heart" class="w-3.5 h-3.5 text-accent ${saved.has(e.id)?'fill-accent':''}"></i></button>
+      </div>
+      <div class="p-2.5 leading-tight">
+        <p class="font-r font-semibold text-navy text-base truncate">${e.name}</p>
+        <p class="text-[11px] text-muted flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${e.state}</p>
+        <p class="text-[9px] font-bold tracking-wider text-accent mt-0.5">${e.stall}</p>
+      </div>
+    </div>`;
+  }
+  function featCard(e){
+    const s=SM[e.sector];
+    return `<div onclick="openStall('${e.id}')" class="tap shrink-0 w-[210px] bg-white rounded-2xl border border-line overflow-hidden shadow-card">
+      <div class="relative h-28 logoimg flex items-center justify-center p-5 border-b border-line overflow-hidden">
+        ${logoInner(e)}
+        <span class="absolute top-2 left-2 text-white text-[9px] font-bold px-2 py-0.5 rounded-full" style="background:${s.color}">${s.short}</span>
+      </div>
+      <div class="p-3">
+        <p class="font-r font-semibold text-navy text-lg leading-tight truncate">${e.name}</p>
+        <p class="text-[12px] text-body">${e.stall}</p>
+        <button onclick="event.stopPropagation();openEnquiry('${e.id}')" class="tap mt-2 w-full bg-accent text-white font-r text-sm py-1.5 rounded-lg">Enquire</button>
+      </div>
+    </div>`;
+  }
+  function renderFeatured(){ document.getElementById('featuredRow').innerHTML = EXHIBITORS.filter(e=>e.featured).map(featCard).join(''); icons(); }
+  function renderGrid(){
+    const i=document.getElementById('searchInput'); const q=(i?.value||'').toLowerCase().trim();
+    document.getElementById('clearBtn').classList.toggle('hidden', !q);
+    const list=EXHIBITORS.filter(e=>{
+      const okS = activeSector==='all' || e.sector===activeSector;
+      const hay=(e.name+' '+SM[e.sector].label+' '+e.state+' '+e.zone+' '+e.stall+' '+e.blurb).toLowerCase();
+      return okS && (!q || hay.includes(q));
+    });
+    document.getElementById('exCount').textContent='('+list.length+')';
+    const g=document.getElementById('homeGrid');
+    g.innerHTML = list.length ? list.map(gridCard).join('')
+      : `<div class="col-span-2 text-center text-muted text-sm py-10"><div class="text-3xl mb-2">🔍</div>No exhibitors match your search.<br/>Try another keyword or sector.</div>`;
+    icons();
+  }
+
+  /* ---------- OTP (functional) ---------- */
+  let sentCode='';
+  function buildOtp(){
+    const wrap=document.getElementById('otp'); wrap.innerHTML='';
+    for(let i=0;i<6;i++){
+      const inp=document.createElement('input');
+      inp.maxLength=1; inp.inputMode='numeric';
+      inp.className='otpbox w-11 h-14 text-center font-r font-semibold text-2xl text-ink rounded-lg border-2 border-[#C6C5D2] bg-surface2 outline-none';
+      inp.addEventListener('input',()=>{ inp.value=inp.value.replace(/[^0-9]/g,''); setBox(inp,!!inp.value); if(inp.value&&inp.nextElementSibling) inp.nextElementSibling.focus(); });
+      inp.addEventListener('keydown',e=>{ if(e.key==='Backspace'&&!inp.value&&inp.previousElementSibling) inp.previousElementSibling.focus(); });
+      wrap.appendChild(inp);
+    }
+  }
+  function setBox(b,filled){
+    if(filled){ b.classList.add('border-accent','bg-beige'); b.classList.remove('border-[#C6C5D2]','bg-surface2'); }
+    else { b.classList.remove('border-accent','bg-beige'); b.classList.add('border-[#C6C5D2]','bg-surface2'); }
+  }
+  function getOtp(){ return [...document.querySelectorAll('#otp .otpbox')].map(b=>b.value).join(''); }
+  function sendOtp(){ sentCode='482931'; document.querySelectorAll('#otp .otpbox').forEach(b=>{b.value='';setBox(b,false);}); otpSecs=44; const f=document.querySelector('#otp .otpbox'); if(f) f.focus(); toast('📩 Demo OTP sent: '+sentCode.split('').join('-')); }
+  function verifyOtp(){
+    const code=getOtp();
+    if(code.length<6){ shakeOtp(); toast('Please enter all 6 digits'); return; }
+    if(sentCode && code!==sentCode){ shakeOtp(); toast('❌ Incorrect OTP — the demo code is '+sentCode); return; }
+    toast('✅ Verified successfully'); setTimeout(()=>goTo('home'),550);
+  }
+  function shakeOtp(){ const o=document.getElementById('otp'); o.classList.remove('shake'); void o.offsetWidth; o.classList.add('shake'); }
+  let otpSecs=44;
+  function tickOtp(){ const el=document.getElementById('otpTimer'); if(!el) return; if(otpSecs>0) otpSecs--; el.textContent='00:'+String(otpSecs).padStart(2,'0'); }
+
+  /* ---------- exhibitor detail (dynamic) ---------- */
+  let currentEx = EXHIBITORS[0];
+  let currentProduct = EXHIBITORS[0].product;
+  /* ---- exhibitor profile helpers ---- */
+  const CERTS = {
+    food:['FSSAI','ISO 22000','APEDA'], consumer:['ISI / BIS','ISO 9001','BEE Rated'],
+    auto:['IATF 16949','ISO 9001','ISO 14001'], finance:['RBI Registered','ISO 27001','CRISIL Rated'],
+    realestate:['RERA Registered','ISO 9001','IGBC Green'], energy:['BIS Certified','ISO 14001','MNRE Approved'],
+    logistics:['ISO 9001','GST Compliant','IATA Member'], engineering:['ISO 9001','CE Marked','TÜV Certified'],
+    jewellery:['BIS Hallmark','IGI Certified','GJEPC Member'], manufacturing:['ISO 9001','REACH','ZED Certified'],
+    textiles:['Handloom Mark','GoTS Organic','SILK Mark'], handicraft:['GI Tagged','Craft Mark','Fair Trade'],
+    wellness:['AYUSH Licensed','GMP Certified','ISO 22716'], pharma:['WHO-GMP','US-FDA','CDSCO Approved'],
+    it:['ISO 27001','CMMI L5','SOC 2'], tourism:['Incredible India','FSSAI','Safe Travels'], toys:['BIS Toy Cert','EN-71','ISO 8124'],
+  };
+  const EXTRA = {
+    food:[{name:'Bulk Export Cartons',price:'On request',moq:'500 kg',kw:'packaging,export'},{name:'Retail Gift Hampers',price:'₹500 – ₹3,000',moq:'100 units',kw:'gift,hamper'}],
+    consumer:[{name:'Commercial Range',price:'On request',moq:'50 units',kw:'appliance,home'},{name:'Spares & AMC',price:'₹200 – ₹4,000',moq:'Custom',kw:'service,parts'}],
+    auto:[{name:'OEM Supply Program',price:'On request',moq:'1000 units',kw:'factory,auto'},{name:'Aftermarket Kits',price:'₹300 – ₹7,500',moq:'200 units',kw:'spare,parts'}],
+    finance:[{name:'Working Capital Lines',price:'On request',moq:'Custom',kw:'finance,loan'},{name:'Insurance & Advisory',price:'On request',moq:'Custom',kw:'insurance,office'}],
+    realestate:[{name:'Commercial Leasing',price:'On request',moq:'Custom',kw:'office,lease'},{name:'Plotted Developments',price:'₹15L – ₹1Cr',moq:'Custom',kw:'land,plot'}],
+    energy:[{name:'EV Charging Stations',price:'On request',moq:'Custom',kw:'charging,ev'},{name:'Rooftop Solar EPC',price:'On request',moq:'Custom',kw:'solar,roof'}],
+    logistics:[{name:'Warehousing Plans',price:'On request',moq:'Custom',kw:'warehouse,storage'},{name:'Last-Mile Delivery',price:'On request',moq:'Custom',kw:'delivery,van'}],
+    engineering:[{name:'Custom Tooling',price:'On request',moq:'Custom',kw:'tools,workshop'},{name:'Smart Factory Kits',price:'On request',moq:'Custom',kw:'automation,robot'}],
+    jewellery:[{name:'Bridal Collections',price:'₹50K – ₹25L',moq:'1 unit',kw:'bridal,gold'},{name:'Corporate Gifting',price:'₹5K – ₹2L',moq:'10 units',kw:'silver,gift'}],
+    manufacturing:[{name:'Industrial Supply',price:'On request',moq:'1 ton',kw:'industry,supply'},{name:'OEM Manufacturing',price:'On request',moq:'Custom',kw:'plant,machine'}],
+    textiles:[{name:'Fabric Wholesale',price:'₹120 – ₹1,500 / m',moq:'200 m',kw:'fabric,textile'},{name:'Apparel Export',price:'On request',moq:'500 pcs',kw:'clothing,apparel'}],
+    handicraft:[{name:'Artisan Collections',price:'₹200 – ₹8,000',moq:'50 units',kw:'handicraft,craft'},{name:'Decor & Gifting',price:'₹150 – ₹5,000',moq:'100 units',kw:'decor,handmade'}],
+    wellness:[{name:'Ayurvedic Range',price:'₹80 – ₹1,200',moq:'100 units',kw:'ayurveda,herbal'},{name:'Wellness Bulk Packs',price:'On request',moq:'500 units',kw:'wellness,herbs'}],
+    pharma:[{name:'Generic Formulations',price:'On request',moq:'Custom',kw:'medicine,pharma'},{name:'OTC & Devices',price:'₹50 – ₹3,000',moq:'200 units',kw:'healthcare,medical'}],
+    it:[{name:'Enterprise Solutions',price:'On request',moq:'Custom',kw:'software,office'},{name:'Devices & Wearables',price:'₹999 – ₹14,999',moq:'100 units',kw:'gadget,electronics'}],
+    tourism:[{name:'Holiday Packages',price:'₹8K – ₹2L',moq:'Custom',kw:'travel,tourism'},{name:'MICE & Events',price:'On request',moq:'Custom',kw:'hotel,resort'}],
+    toys:[{name:'Educational Toys',price:'₹150 – ₹2,500',moq:'100 units',kw:'toys,kids'},{name:'Wooden Craft Toys',price:'₹200 – ₹1,800',moq:'50 units',kw:'wooden,toy'}],
+  };
+  const GSTC = {'Delhi':'07','Maharashtra':'27','Haryana':'06','Uttar Pradesh':'09','Tamil Nadu':'33','Karnataka':'29','Punjab':'03','Gujarat':'24','Rajasthan':'08','Jammu & Kashmir':'01','Uttarakhand':'05','Kerala':'32','Sikkim':'11'};
+  function gstin(e){ const c=GSTC[e.state]||'07'; return c+(e.id.slice(0,5).toUpperCase().padEnd(5,'X'))+'1Z'+(e.id.length%9); }
+  function productsFor(e){ return [e.product, ...(EXTRA[e.sector]||[])]; }
+  function socialsFor(e){ const h=e.name.replace(/[^a-z0-9]/gi,'').toLowerCase();
+    return [
+      {ic:'globe', act:`window.open('https://${e.web}','_blank')`},
+      {ic:'instagram', act:`toast('📷 @${h} on Instagram')`},
+      {ic:'facebook', act:`toast('👍 ${e.name} on Facebook')`},
+      {ic:'twitter', act:`toast('𝕏 @${h}')`},
+      {ic:'linkedin', act:`toast('in · ${e.name} on LinkedIn')`},
+      {ic:'youtube', act:`toast('▶ ${e.name} on YouTube')`},
+      {ic:'message-circle', act:`window.open('https://wa.me/919667751132','_blank')`},
+    ]; }
+  function docsFor(e){ return [
+    {nm:'Company Brochure', mt:'PDF · 2.4 MB', ic:'file-text', act:"openDoc('brochure')"},
+    {nm:'Product Catalogue 2026', mt:'PDF · 5.1 MB', ic:'book-open', act:"openDoc('catalogue')"},
+    {nm:'Rate Card / Stall Pricing', mt:'PDF · 480 KB', ic:'tag', act:"openRateCard()"},
+    {nm:'Brochure Template (editable)', mt:'DOCX · 1.2 MB', ic:'layout-template', act:"toast('📐 Brochure template downloaded')"},
+    {nm:'Social Media Kit', mt:'ZIP · 8.0 MB', ic:'share-2', act:"toast('🎨 Media kit downloaded')"},
+  ]; }
+  function reviewsFor(e){ return [
+    {n:'Verified Buyer · Delhi', t:`Excellent quality and a professional team at the ${e.name} booth. Smooth B2B onboarding.`, r:5},
+    {n:'Trade Visitor · '+e.state, t:`Competitive wholesale pricing — got a quote on the spot. Recommended for bulk orders.`, r:4},
+  ]; }
+  function starRow(r){ let s=''; const f=Math.round(r); for(let i=1;i<=5;i++) s+=`<i data-lucide="star" class="w-3.5 h-3.5 ${i<=f?'text-gold fill-gold':'text-line'}"></i>`; return s; }
+
+  function fillStall(){
+    const e=currentEx, s=SM[e.sector];
+    document.getElementById('stLogoBox').innerHTML=logoInner(e);
+    document.getElementById('stName').textContent=e.name;
+    document.getElementById('stState').textContent=e.state;
+    document.getElementById('stBlurb').textContent=e.blurb;
+    document.getElementById('stLoc').textContent='Hall · '+e.stall.replace('Stall ','');
+    document.getElementById('stTimings').textContent='Open daily 10:00 AM – 7:00 PM · Live demo at 3:00 PM';
+    document.getElementById('stRating').textContent=e.rating.toFixed(1);
+    document.getElementById('stRev').textContent='('+e.reviews+')';
+    document.getElementById('stStars').innerHTML=starRow(e.rating);
+    const sb=document.getElementById('stSectorBadge'); sb.textContent=s.short; sb.style.background=s.color;
+    document.getElementById('stCodeBadge').textContent=e.stall.replace('Stall ','');
+    document.getElementById('stZoneBadge').textContent=e.zone.toUpperCase();
+    setPhoto(document.getElementById('stHero'), e.photo, e.id);
+    // stats
+    document.getElementById('stStats').innerHTML=[
+      ['calendar','Established',e.founded],['users','Team Size',e.staff],
+      ['globe-2','Exports',e.exports],['package','Min. Order',e.product.moq],
+    ].map(([ic,l,v])=>`<div class="bg-white rounded-xl border border-line p-3"><div class="flex items-center gap-1.5 text-muted text-[10px] font-bold tracking-wider"><i data-lucide="${ic}" class="w-3.5 h-3.5"></i> ${l.toUpperCase()}</div><p class="font-r font-semibold text-navy text-[15px] mt-1 leading-tight">${v}</p></div>`).join('');
+    // socials
+    document.getElementById('stSocials').innerHTML=socialsFor(e).map(x=>`<button onclick="${x.act}" class="tap w-10 h-10 rounded-full bg-white border border-line flex items-center justify-center text-navy"><i data-lucide="${x.ic}" class="w-4 h-4"></i></button>`).join('');
+    // products + catalogue tile
+    const prods=productsFor(e);
+    document.getElementById('stProducts').innerHTML=prods.map((p,idx)=>`<div onclick="openProduct(${idx})" class="tap bg-white rounded-xl border border-line overflow-hidden shadow-card"><img class="ph w-full h-24 object-cover" data-kw="${p.kw}" data-seed="${e.id}p${idx}" alt=""><div class="p-2.5"><p class="font-r font-semibold text-navy text-sm leading-tight truncate">${p.name}</p><p class="text-accent font-r font-semibold text-sm mt-0.5">${p.price}</p><p class="text-[10px] text-muted">MOQ: ${p.moq}</p></div></div>`).join('')
+      + `<div onclick="openDoc('catalogue')" class="tap bg-white rounded-xl border border-line flex flex-col items-center justify-center text-center p-3 shadow-card"><i data-lucide="book-open" class="w-7 h-7 text-accent"></i><p class="font-r font-semibold text-navy text-sm mt-2">Full Catalogue</p><p class="text-[11px] text-muted">Open as PDF</p></div>`;
+    // documents
+    document.getElementById('stDocs').innerHTML=docsFor(e).map(d=>`<button onclick="${d.act}" class="tap w-full bg-white rounded-xl border border-line p-3 flex items-center gap-3 text-left"><div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0"><i data-lucide="${d.ic}" class="w-5 h-5 text-accent"></i></div><div class="flex-1 leading-tight min-w-0"><p class="font-semibold text-navy text-[14px] truncate">${d.nm}</p><p class="text-[11px] text-muted">${d.mt}</p></div><i data-lucide="download" class="w-4 h-4 text-muted shrink-0"></i></button>`).join('');
+    // certifications
+    document.getElementById('stCerts').innerHTML=(CERTS[e.sector]||['ISO 9001']).concat(['Made in India','MSME Registered']).map(c=>`<span class="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-agri/10 text-agri flex items-center gap-1"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> ${c}</span>`).join('');
+    // business details
+    const rows=[['GSTIN',gstin(e)],['Established',e.founded],['Team Size',e.staff+' employees'],['Export Markets',e.exports],['Headquarters',e.state+', India'],['Categories',s.label+' · '+e.zone]];
+    document.getElementById('stBiz').innerHTML=rows.map((r,i)=>`<div class="grid grid-cols-2 px-4 py-2.5 text-[13px] ${i%2?'bg-white':'bg-beige'}"><span class="font-bold text-body/60">${r[0]}</span><span class="text-navy/70 text-right">${r[1]}</span></div>`).join('');
+    // gallery
+    document.getElementById('stGallery').innerHTML=[0,1,2,3].map(n=>`<img class="ph w-40 h-28 rounded-xl object-cover shrink-0" data-kw="${e.photo}" data-seed="${e.id}g${n}" alt="">`).join('');
+    // reviews
+    document.getElementById('stReviews').innerHTML=reviewsFor(e).map(rv=>`<div class="bg-white rounded-xl border border-line p-3"><div class="flex items-center justify-between"><p class="font-semibold text-navy text-[13px]">${rv.n}</p><div class="flex">${starRow(rv.r)}</div></div><p class="text-[13px] text-body mt-1 leading-snug">${rv.t}</p></div>`).join('');
+    // related
+    const rel=EXHIBITORS.filter(x=>x.sector===e.sector&&x.id!==e.id).slice(0,4);
+    const pool=rel.length?rel:EXHIBITORS.filter(x=>x.id!==e.id).slice(0,4);
+    document.getElementById('stRelated').innerHTML=pool.map(x=>`<div onclick="openStall('${x.id}')" class="tap shrink-0 w-36 bg-white rounded-xl border border-line overflow-hidden shadow-card"><div class="h-20 logoimg flex items-center justify-center p-3 border-b border-line overflow-hidden">${logoInner(x)}</div><div class="p-2.5"><p class="font-r font-semibold text-navy text-sm truncate">${x.name}</p><p class="text-[11px] text-muted">${x.state}</p></div></div>`).join('');
+    loadPhotos(); icons();
+  }
+
+  /* ---- generated, printable brochure + catalogue (open in a new tab, save via print) ---- */
+  function docHead(t){ return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${t}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"></head>`; }
+  function brochureHTML(e){
+    const s=SM[e.sector], prods=productsFor(e);
+    return docHead(e.name+' — BVM 2026 Brochure')+`<body style="margin:0;font-family:'DM Sans',sans-serif;color:#1b1c19;background:#e9eaee;">
+    <div style="max-width:820px;margin:0 auto;background:#fff;">
+      <div style="background:#001454;color:#fff;padding:26px 36px;border-bottom:5px solid #f5be3c;display:flex;justify-content:space-between;align-items:center;gap:16px;">
+        <div><div style="font-family:Rajdhani;font-weight:700;font-size:24px;letter-spacing:1px;">BHARATIYA VYAPAR MAHOTSAV <span style="color:#fe6b00;">2026</span></div><div style="font-size:12px;opacity:.75;">Exhibitor Profile · Bharat Mandapam, New Delhi · 12–15 Aug 2026</div></div>
+        <div style="background:#fff;border-radius:10px;padding:8px;width:96px;height:64px;display:flex;align-items:center;justify-content:center;">${e.logo?`<img src="${logo(e.logo)}" style="max-width:100%;max-height:100%;object-fit:contain;">`:`<span style="font-family:Rajdhani;font-weight:700;font-size:26px;color:${s.color};">${e.name.split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()}</span>`}</div>
+      </div>
+      <div style="padding:30px 36px;">
+        <span style="background:${s.color};color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;">${s.label.toUpperCase()}</span>
+        <h1 style="font-family:Rajdhani;font-size:38px;margin:10px 0 2px;color:#001454;">${e.name}</h1>
+        <div style="color:#767681;font-size:14px;">📍 ${e.state}, India · Stall ${e.stall.replace('Stall ','')} · ${e.zone} Zone</div>
+        <p style="font-size:15px;line-height:1.7;color:#454650;margin-top:16px;">${e.blurb}</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0;">
+          ${[['Established',e.founded],['Team',e.staff],['Exports',e.exports],['Rating',e.rating.toFixed(1)+' ★']].map(x=>`<div style="border:1px solid #e5e7eb;border-radius:12px;padding:12px;"><div style="font-size:10px;letter-spacing:1px;color:#767681;font-weight:700;">${x[0].toUpperCase()}</div><div style="font-family:Rajdhani;font-weight:600;font-size:18px;color:#001454;">${x[1]}</div></div>`).join('')}
+        </div>
+        <h3 style="font-family:Rajdhani;color:#001454;font-size:20px;border-left:4px solid #fe6b00;padding-left:10px;">Key Products</h3>
+        <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;">${prods.map((p,i)=>`<tr style="background:${i%2?'#fff':'#f5f3ee'};"><td style="padding:10px 12px;font-weight:600;color:#001454;">${p.name}</td><td style="padding:10px 12px;color:#a04100;font-weight:600;">${p.price}</td><td style="padding:10px 12px;color:#767681;">MOQ: ${p.moq}</td></tr>`).join('')}</table>
+        <h3 style="font-family:Rajdhani;color:#001454;font-size:20px;border-left:4px solid #fe6b00;padding-left:10px;margin-top:24px;">Certifications</h3>
+        <div style="margin-top:8px;">${(CERTS[e.sector]||[]).concat(['Made in India']).map(c=>`<span style="display:inline-block;background:#2d7a3a18;color:#2d7a3a;font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;margin:3px;">✔ ${c}</span>`).join('')}</div>
+        <div style="margin-top:26px;background:#f0eee9;border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div><div style="font-family:Rajdhani;font-weight:600;color:#001454;font-size:17px;">Connect at BVM 2026</div><div style="font-size:13px;color:#454650;">🌐 ${e.web} &nbsp;·&nbsp; ✉ contactus@bvm2026.com &nbsp;·&nbsp; ☎ +91 96677 51132</div></div>
+          <button onclick="window.print()" style="background:#fe6b00;color:#fff;border:0;font-family:Rajdhani;font-weight:600;font-size:16px;padding:12px 22px;border-radius:10px;cursor:pointer;">🖨 Print / Save as PDF</button>
+        </div>
+      </div>
+      <div style="background:#001454;color:#fff;text-align:center;font-size:11px;padding:12px;">Generated by the BVM 2026 app · Bharatiya Vyapar Mahotsav · The Great Indian Common Market</div>
+    </div></body></html>`;
+  }
+  function catalogueHTML(e){
+    const s=SM[e.sector], prods=productsFor(e);
+    return docHead(e.name+' — Product Catalogue')+`<body style="margin:0;font-family:'DM Sans',sans-serif;background:#e9eaee;color:#1b1c19;">
+    <div style="max-width:820px;margin:0 auto;background:#fff;">
+      <div style="background:#001454;color:#fff;padding:24px 32px;border-bottom:5px solid #f5be3c;"><div style="font-family:Rajdhani;font-weight:700;font-size:22px;">${e.name} — Product Catalogue 2026</div><div style="font-size:12px;opacity:.75;">BVM 2026 · Stall ${e.stall.replace('Stall ','')} · ${s.label}</div></div>
+      <div style="padding:28px 32px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;">${prods.map((p,i)=>`<div style="border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;"><img src="https://loremflickr.com/400/260/${encodeURIComponent(p.kw)}?lock=${hash(e.id+i)}" style="width:100%;height:150px;object-fit:cover;background:#1A2B6B;"><div style="padding:14px;"><div style="font-family:Rajdhani;font-weight:600;font-size:18px;color:#001454;">${p.name}</div><div style="color:#a04100;font-weight:700;margin-top:4px;">${p.price}</div><div style="font-size:12px;color:#767681;">Minimum order: ${p.moq}</div></div></div>`).join('')}</div>
+      <div style="text-align:center;padding:0 0 24px;"><button onclick="window.print()" style="background:#fe6b00;color:#fff;border:0;font-family:Rajdhani;font-weight:600;font-size:16px;padding:12px 26px;border-radius:10px;cursor:pointer;">🖨 Print / Save as PDF</button></div>
+      <div style="background:#001454;color:#fff;text-align:center;font-size:11px;padding:12px;">Enquiries: contactus@bvm2026.com · +91 96677 51132 · bharatiyavyaparmahotsav.com</div>
+    </div></body></html>`;
+  }
+  function openDoc(type){ const e=currentEx; const html=type==='catalogue'?catalogueHTML(e):brochureHTML(e); const w=window.open('','_blank'); if(!w){ toast('Allow pop-ups to open the document'); return; } w.document.open(); w.document.write(html); w.document.close(); toast('📄 '+(type==='catalogue'?'Catalogue':'Brochure')+' opened in a new tab'); }
+  function openRateCard(){ window.open('https://bharatiyavyaparmahotsav.com/images/Rate-Card-BVM.pdf','_blank'); toast('📄 Opening BVM rate card'); }
+  function openStall(id){ currentEx=byId(id)||currentEx; fillStall(); goTo('stall'); }
+
+  function fillProduct(){
+    const e=currentEx, s=SM[e.sector], p=currentProduct||e.product;
+    document.getElementById('prdTitle').textContent=p.name;
+    document.getElementById('prdSeller').textContent=e.name;
+    document.getElementById('prdPrice').textContent=p.price;
+    document.getElementById('prdMoq').textContent=p.moq;
+    document.getElementById('prdDesc').textContent=e.blurb+' Available for bulk B2B orders at BVM 2026.';
+    const sb=document.getElementById('prdSectorBadge'); sb.textContent=s.short; sb.style.background=s.color;
+    setPhoto(document.getElementById('prdHero'), p.kw, e.id+'ph');
+    document.getElementById('prdThumbs').innerHTML=[0,1,2,3].map(n=>`<img class="ph w-14 h-14 rounded-lg object-cover ${n===0?'ring-2 ring-accent':''}" data-kw="${p.kw}" data-seed="${e.id}t${n}" alt="">`).join('');
+    loadPhotos(); icons();
+  }
+  function openProduct(idx){ currentProduct = (typeof idx==='number' ? productsFor(currentEx)[idx] : currentEx.product) || currentEx.product; fillProduct(); goTo('product'); }
+
+  function fillEnquiry(){
+    const e=currentEx;
+    document.getElementById('enqLogoBox').innerHTML=logoInner(e);
+    document.getElementById('enqName').textContent=e.name;
+    document.getElementById('enqStall').textContent=e.stall.toUpperCase();
+  }
+  function openEnquiry(id){ if(id) currentEx=byId(id)||currentEx; fillEnquiry(); goTo('enquiry'); }
+  function sendEnquiry(){ toast('✅ Enquiry sent to '+currentEx.name); setTimeout(()=>reset('home'),1200); }
+
+  /* ---------- saving (functional) ---------- */
+  let saved = new Set(['nutslane','sona','signature','urja']);
+  function toggleSave(id, btn){
+    if(saved.has(id)){ saved.delete(id); toast('Removed from saved'); }
+    else { saved.add(id); toast('💾 Saved '+byId(id).name); }
+    if(btn){ const ic=btn.querySelector('i'); ic && ic.classList.toggle('fill-accent', saved.has(id)); }
+    renderSaved();
+  }
+  function saveCurrent(){ saved.add(currentEx.id); renderSaved(); fillSavedConfirm(); goTo('saved-confirm'); }
+  function fillSavedConfirm(){
+    document.getElementById('scName').textContent=currentEx.name;
+    document.getElementById('scStall').textContent=currentEx.stall;
+    const recs=EXHIBITORS.filter(x=>x.id!==currentEx.id&&!saved.has(x.id)).slice(0,2);
+    const pool=recs.length?recs:EXHIBITORS.filter(x=>x.id!==currentEx.id).slice(0,2);
+    document.getElementById('recRow').innerHTML=pool.map(x=>{
+      const s=SM[x.sector];
+      return `<div onclick="openStall('${x.id}')" class="tap bg-white rounded-xl border border-line overflow-hidden shadow-card">
+        <div class="relative h-24 logoimg flex items-center justify-center p-3 border-b border-line overflow-hidden">${logoInner(x)}
+          <button onclick="event.stopPropagation();toggleSave('${x.id}',this)" class="absolute top-2 right-2 w-6 h-6 bg-surface2 rounded-full flex items-center justify-center"><i data-lucide="heart" class="w-3.5 h-3.5 text-accent"></i></button></div>
+        <div class="p-2.5"><p class="font-r font-semibold text-ink text-sm truncate">${x.name}</p><span class="inline-block text-white text-[8px] font-bold px-2 py-0.5 rounded-full mt-1" style="background:${s.color}">${s.short}</span><p class="text-[11px] text-muted flex items-center gap-1 mt-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${x.state}</p></div>
+      </div>`;
+    }).join('');
+    icons();
+  }
+  function renderSaved(){
+    const list=[...saved].map(byId).filter(Boolean);
+    document.getElementById('savedCount').textContent=list.length;
+    const wrap=document.getElementById('savedList');
+    wrap.innerHTML = list.length ? list.map(e=>{
+      const s=SM[e.sector];
+      return `<div class="bg-white rounded-2xl border border-line shadow-card p-3 flex items-center gap-3">
+        <div class="w-16 h-16 rounded-lg logoimg border border-line flex items-center justify-center p-2 shrink-0 overflow-hidden">${logoInner(e)}</div>
+        <div class="flex-1 leading-tight"><p class="font-r font-bold text-navy text-lg truncate">${e.name}</p><span class="inline-block text-white text-[8px] font-bold px-2 py-0.5 rounded-full my-1" style="background:${s.color}">${s.short}</span><p class="text-[13px] text-body">${e.stall}</p></div>
+        <div class="flex flex-col items-end gap-2 self-stretch"><button onclick="toggleSave('${e.id}')" class="tap"><i data-lucide="heart" class="w-5 h-5 text-accent fill-accent"></i></button><button onclick="openEnquiry('${e.id}')" class="tap bg-accent text-white font-r text-xs px-3 py-1.5 rounded-lg">Enquire</button></div>
+      </div>`;
+    }).join('') : `<div class="text-center text-muted text-sm py-12"><div class="text-3xl mb-2">🔖</div>No saved stalls yet.<br/>Tap the heart on any exhibitor to save it.</div>`;
+    icons();
+  }
+
+  /* ---------- zones screen ---------- */
+  const ZONES = [
+    {name:'Business to Business', emoji:'🤝'}, {name:'Outdoor Exhibition', emoji:'⛺'},
+    {name:'Investment & Finance', emoji:'💰'}, {name:'Seminars', emoji:'🎤'},
+    {name:'Skilling & Training', emoji:'🎓'}, {name:'Tourism & Culture', emoji:'🏛️'},
+    {name:'Tastes of India', emoji:'🍲'}, {name:'Women & Youth', emoji:'👩‍💼'},
+  ];
+  function zoneCount(name){ return EXHIBITORS.filter(e=>e.zone===name).length; }
+  function renderZones(){
+    document.getElementById('zoneGrid').innerHTML = ZONES.map((z,i)=>`<div onclick="toast('${z.emoji} ${z.name}')" class="tap bg-white rounded-2xl border border-line shadow-card p-4 flex flex-col gap-2"><div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl" style="background:${SECTORS[(i%10)+1].color}1f">${z.emoji}</div><p class="font-r font-semibold text-navy text-[15px] leading-tight">${z.name}</p><p class="text-[11px] text-accent font-bold">${zoneCount(z.name)} exhibitors ›</p></div>`).join('');
+    document.getElementById('sectorList').innerHTML = SECTORS.filter(s=>s.key!=='all').map(s=>{
+      const n=EXHIBITORS.filter(e=>e.sector===s.key).length;
+      return `<button onclick="openSector('${s.key}')" class="tap w-full bg-white rounded-xl border border-line p-3 flex items-center gap-3 text-left"><span class="w-9 h-9 rounded-lg flex items-center justify-center text-white text-[9px] font-bold shrink-0" style="background:${s.color}">${s.short.slice(0,4)}</span><span class="flex-1 font-semibold text-navy text-[14px]">${s.label}</span><span class="text-[12px] text-muted font-semibold">${n}</span><i data-lucide="chevron-right" class="w-4 h-4 text-muted"></i></button>`;
+    }).join('');
+    icons();
+  }
+  function openSector(k){ activeSector=k; renderChips(); renderGrid(); reset('home'); toast(SM[k].label+' · '+EXHIBITORS.filter(e=>e.sector===k).length+' exhibitors'); }
+
+  /* ---------- notifications screen ---------- */
+  const NOTIFS = [
+    {ic:'mail', c:'#2d7a3a', t:'Sona Comstar replied to your enquiry', b:'“Thanks for your interest — sharing our EV motor catalogue.”', tm:'2m ago', un:true, act:"openStall('sona')"},
+    {ic:'tag', c:'#a04100', t:'Price drop at Kent RO', b:'Mineral RO purifiers now from ₹11,000 for BVM visitors.', tm:'25m ago', un:true, act:"openStall('kent')"},
+    {ic:'bookmark', c:'#001454', t:'Signature Global added a new project', b:'A saved stall just listed new inventory in your wishlist.', tm:'1h ago', un:true, act:"goTo('saved')"},
+    {ic:'calendar', c:'#7c3aed', t:'BVM 2026 opens in 2 days', b:'Plan your visit to Bharat Mandapam, 12–15 August.', tm:'3h ago', un:true, act:"goTo('zones')"},
+    {ic:'ticket', c:'#2d7a3a', t:'Your visitor pass is ready', b:'BVM-2026-V-04821 · All-zones access. View your QR badge.', tm:'5h ago', un:true, act:"goTo('profile')"},
+    {ic:'sparkles', c:'#a04100', t:'12 new exhibitors in Tastes of India', b:'Fresh F&B brands just joined the zone.', tm:'Yesterday', un:false, act:"openSector('food')"},
+    {ic:'mic', c:'#001454', t:'Keynote: ‘Make in India 2.0’', b:'11:00 AM · Hall A · Hon’ble Minister of Commerce.', tm:'Yesterday', un:false, act:"toast('📅 Added to schedule')"},
+    {ic:'plane', c:'#7c3aed', t:'Travel reimbursement is now open', b:'Eligible buyers can submit travel claims in-app.', tm:'2 days ago', un:false, act:"toast('🧾 Opening reimbursement form')"},
+  ];
+  function renderNotifications(){
+    document.getElementById('notifList').innerHTML = NOTIFS.map((n,i)=>`<button onclick="readNotif(${i})" class="tap w-full text-left px-4 py-3.5 flex gap-3 border-b border-line ${n.un?'bg-peri/25':'bg-white'}"><div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background:${n.c}1a"><i data-lucide="${n.ic}" class="w-5 h-5" style="color:${n.c}"></i></div><div class="flex-1 min-w-0"><div class="flex items-start gap-2"><p class="font-semibold text-navy text-[14px] leading-tight flex-1">${n.t}</p>${n.un?'<span class="w-2 h-2 rounded-full bg-cta shrink-0 mt-1.5"></span>':''}</div><p class="text-[12.5px] text-body mt-0.5 leading-snug">${n.b}</p><p class="text-[11px] text-muted mt-1">${n.tm}</p></div></button>`).join('');
+    updateBadge(); icons();
+  }
+  function updateBadge(){ const n=NOTIFS.filter(x=>x.un).length; const b=document.getElementById('notifBadge'); if(b){ b.textContent=n; b.style.display=n?'flex':'none'; } }
+  function readNotif(i){ NOTIFS[i].un=false; const act=NOTIFS[i].act; renderNotifications(); if(act){ try{ eval(act); }catch(e){} } }
+  function markAllRead(){ NOTIFS.forEach(n=>n.un=false); renderNotifications(); toast('✓ All caught up'); }
+
+  /* ---------- scanner screen ---------- */
+  function scanSim(){ const e=EXHIBITORS[Math.floor(Math.random()*EXHIBITORS.length)]; toast('✅ Scanned '+e.stall.replace('Stall ','')); openStall(e.id); }
+  function scanManual(){ const v=(document.getElementById('scanCode').value||'').trim().toUpperCase(); if(!v){ toast('Enter a stall code'); return; } const e=EXHIBITORS.find(x=>x.stall.toUpperCase().includes(v)); if(e){ toast('✅ Found '+e.name); openStall(e.id); } else toast('❌ No stall found for “'+v+'”'); }
+
+  /* ---------- profile screen ---------- */
+  function renderProfile(){
+    const el=document.getElementById('pfSaved'); if(el) el.textContent=saved.size;
+    const items=[
+      {ic:'inbox', t:'My Enquiries', act:"toast('📨 3 active enquiries')"},
+      {ic:'heart', t:'Saved Stalls', act:"goTo('saved')"},
+      {ic:'qr-code', t:'Visitor Pass / Badge', act:"toast('🎟️ BVM-2026-V-04821')"},
+      {ic:'calendar-days', t:'Event Schedule', act:"toast('📅 4-day programme')"},
+      {ic:'map', t:'Floor Plan', act:"toast('🗺️ Bharat Mandapam floor plan')"},
+      {ic:'plane', t:'Travel Reimbursement', act:"toast('🧾 Reimbursement form')"},
+      {ic:'presentation', t:'Conference Sessions', act:"toast('🎤 Session library')"},
+      {ic:'globe', t:'Language · English', act:"toast('🌐 हिन्दी / English')"},
+      {ic:'life-buoy', t:'Help & Support', act:"toast('☎ +91 96677 51132')"},
+      {ic:'info', t:'About BVM 2026', act:"toast('🇮🇳 The Great Indian Common Market')"},
+      {ic:'log-out', t:'Log Out', act:"reset('splash')", d:true},
+    ];
+    document.getElementById('profileMenu').innerHTML = items.map(m=>`<button onclick="${m.act}" class="tap w-full bg-white rounded-xl border border-line p-3.5 flex items-center gap-3 text-left"><i data-lucide="${m.ic}" class="w-5 h-5 ${m.d?'text-red-600':'text-accent'}"></i><span class="flex-1 font-semibold text-[14px] ${m.d?'text-red-600':'text-navy'}">${m.t}</span><i data-lucide="chevron-right" class="w-4 h-4 text-muted"></i></button>`).join('');
+    icons();
+  }
+
+  /* ---------- countdown ---------- */
+  let cd={d:2,h:14,m:35,s:0};
+  function tickCd(){ cd.s--; if(cd.s<0){cd.s=59;cd.m--; if(cd.m<0){cd.m=59;cd.h--; if(cd.h<0){cd.h=23;cd.d=Math.max(0,cd.d-1);}}} const p=n=>String(n).padStart(2,'0'); const D=document.getElementById('cdD'); if(D){D.textContent=p(cd.d);document.getElementById('cdH').textContent=p(cd.h);document.getElementById('cdM').textContent=p(cd.m);} }
+
+  /* ---------- jumper + fit ---------- */
+  const LABELS={'splash':'1 · Splash','login':'2 · Login','home':'3 · Home','stall':'4 · Stall','product':'5 · Product','enquiry':'6 · Enquiry','saved-confirm':'7 · Saved ✓','saved':'8 · Saved','zones':'9 · Zones','scanner':'10 · Scanner','notifications':'11 · Alerts','profile':'12 · Profile'};
+  function buildJumper(){ document.getElementById('jumper').innerHTML=SCREENS.map(id=>`<button data-jump="${id}" onclick="reset('${id}')" class="tap text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70">${LABELS[id]}</button>`).join(''); }
+  function fit(){ const phone=document.getElementById('phone'); const scale=Math.min(1,(window.innerHeight-150)/880); phone.style.transform='scale('+scale+')'; phone.style.marginBottom=(scale<1?(880*scale-880):0)+'px'; }
+
+  /* ---------- init ---------- */
+  buildOtp(); renderChips(); renderFeatured(); renderGrid(); renderSaved(); buildJumper(); buildNavs();
+  renderZones(); renderNotifications(); renderProfile();
+  loadPhotos(); icons();
+  const h=location.hash.slice(1); if(SCREENS.includes(h)) stack=[h];
+  if(curr()==='stall') fillStall(); if(curr()==='product') fillProduct(); if(curr()==='enquiry') fillEnquiry();
+  paint(); fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', ()=>{ const x=location.hash.slice(1); if(SCREENS.includes(x)) reset(x); });
+  setInterval(tickCd,1000); setInterval(tickOtp,1000);
+</script>
+</body>
+</html>
