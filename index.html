@@ -100,7 +100,7 @@
   .molten::after{ content:''; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(180deg,rgba(255,255,255,.22),transparent 42%); pointer-events:none; }
   @keyframes molten{ 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
   .fab-ring,.goldring{ position:relative; }
-  .fab-ring::before,.goldring::before{ content:''; position:absolute; inset:-4px; border-radius:inherit; z-index:-1; background:conic-gradient(from 0deg,#F4C24B,#FF8A00,#FFE08A,#FF6A1A,#F4C24B); animation:spinring 8s linear infinite; }
+  .fab-ring::before,.goldring::before{ content:''; position:absolute; inset:-2px; border-radius:inherit; z-index:-1; background:conic-gradient(from 0deg,#F4C24B,#FF8A00,#FFE08A,#FF6A1A,#F4C24B); opacity:.55; }
   @keyframes spinring{ to{ transform:rotate(360deg); } }
   .glass{ -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%); }
   .glasshead{ -webkit-backdrop-filter:blur(12px) saturate(140%); backdrop-filter:blur(12px) saturate(140%); background:rgba(251,248,241,.82); }
@@ -179,7 +179,7 @@
               </div>
 
               <div class="w-full">
-                <button onclick="goTo('sponsors')" class="tap fab-ring rounded-xl w-full"><span class="molten flex items-center justify-center gap-2 w-full text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten">GET STARTED <i data-lucide="arrow-right" class="w-5 h-5"></i></span></button>
+                <button onclick="goTo('sponsors')" class="tap molten w-full text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten flex items-center justify-center gap-2">GET STARTED <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
                 <p class="text-center text-[10px] text-white/40 mt-3 tracking-[.12em]">HONOURED BY OUR PARTNERS &amp; SPONSORS →</p>
               </div>
             </div>
@@ -207,7 +207,7 @@
               <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[120px]"><img src="social-impact.png" class="max-w-full max-h-32 object-contain" alt="Social Impact Partner — Rotary District 3011" loading="lazy"></div>
               <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[150px]"><img src="host-state.png" class="max-w-full max-h-44 object-contain" alt="Host State — Government of NCT of Delhi & Delhi Tourism" loading="lazy"></div>
               <div class="text-center pt-1"><p class="eyebrow text-accent">And</p><p class="font-r font-semibold text-navy text-lg -mt-0.5">40+ supporting trade associations</p></div>
-              <button onclick="goTo('login')" class="tap fab-ring rounded-xl w-full mt-1"><span class="molten flex items-center justify-center gap-2 w-full text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten">ENTER THE APP <i data-lucide="arrow-right" class="w-5 h-5"></i></span></button>
+              <button onclick="goTo('login')" class="tap molten w-full mt-1 text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten flex items-center justify-center gap-2">ENTER THE APP <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
             </div>
           </div>
         </section>
