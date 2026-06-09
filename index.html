@@ -644,6 +644,18 @@
               </div>
             </div>
 
+            <!-- Visitor Remark -->
+            <div class="px-4 mt-5">
+              <p class="eyebrow text-accent">Your private note</p>
+              <h2 class="font-r font-semibold text-navy text-xl">Add a Remark</h2>
+              <p class="text-[12px] text-muted">Jot a reminder about this exhibitor — saved to your visit.</p>
+              <div id="emRemarkSaved" class="hidden mt-3"></div>
+              <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5 mt-3">
+                <textarea id="emRemark" rows="2" class="w-full outline-none text-[15px] text-ink bg-transparent resize-none" placeholder="e.g. Great pricing on bulk orders — follow up after the fair…"></textarea>
+              </div>
+              <button onclick="saveRemark()" class="tap molten w-full mt-2 text-white font-r font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2"><i data-lucide="message-square" class="w-4 h-4"></i> Save Remark</button>
+            </div>
+
             <!-- Action Buttons -->
             <div class="px-4 mt-6 pb-6">
               <div class="grid grid-cols-2 gap-3">
@@ -823,6 +835,20 @@
               <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5"><label class="text-[11px] font-semibold tracking-wide text-muted">Phone</label><input id="exfPhone" class="w-full outline-none text-[15px] text-ink bg-transparent tnum" /></div>
               <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5"><label class="text-[11px] font-semibold tracking-wide text-muted">Website</label><input id="exfWeb" class="w-full outline-none text-[15px] text-ink bg-transparent" /></div>
             </div>
+            <div class="hr-gold my-1"></div>
+            <p class="eyebrow">Business profile</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5"><label class="text-[11px] font-semibold tracking-wide text-muted">Established</label><input id="exfFounded" inputmode="numeric" class="w-full outline-none text-[15px] text-ink bg-transparent tnum" /></div>
+              <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5"><label class="text-[11px] font-semibold tracking-wide text-muted">Team Size</label><input id="exfStaff" class="w-full outline-none text-[15px] text-ink bg-transparent" /></div>
+            </div>
+            <div class="field field-focus bg-white rounded-xl border border-line px-3 py-2.5"><label class="text-[11px] font-semibold tracking-wide text-muted">Export Markets</label><input id="exfExports" class="w-full outline-none text-[15px] text-ink bg-transparent" /></div>
+            <div class="hr-gold my-1"></div>
+            <div class="flex items-center justify-between">
+              <p class="eyebrow">Marketing assets</p>
+              <button onclick="toast('⬆️ Upload new asset (demo)')" class="tap text-[11px] font-bold tracking-wider text-accent flex items-center gap-1"><i data-lucide="upload" class="w-3.5 h-3.5"></i> UPLOAD</button>
+            </div>
+            <p class="text-[12px] text-muted -mt-1.5">Brochure, catalogue &amp; business card visitors receive on scan.</p>
+            <div id="exfAssets" class="space-y-2"></div>
           </div>
           <div class="px-4 py-3 bg-surface border-t border-line">
             <button onclick="saveExProfile()" class="tap molten w-full text-white font-r font-bold text-lg py-3.5 rounded-xl flex items-center justify-center gap-2"><i data-lucide="check" class="w-5 h-5"></i> Save &amp; Refresh QR</button>
@@ -1779,6 +1805,7 @@
     ];
     const vw=document.getElementById('emVouchers');
     if(vw) vw.innerHTML=vouchers.map(v=>`<div class="rv bg-white rounded-xl border border-dashed border-accent/40 p-3 shadow-card"><div class="flex items-center justify-between gap-2"><div class="min-w-0"><p class="font-r font-bold text-accent text-base tnum">${v.code}</p><p class="text-[13px] text-body">${v.desc}</p><p class="text-[11px] text-muted mt-0.5">${v.valid}</p></div><button onclick="copyVoucher('${v.code}')" class="tap w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center shrink-0"><i data-lucide="copy" class="w-4 h-4 text-accent"></i></button></div></div>`).join('');
+    renderRemark();
     icons();
   }
   function openMaterials(id){ if(id) currentEx=byId(id)||currentEx; fillExhibitorMaterials(); goTo('exhibitor-materials'); }
@@ -1787,6 +1814,24 @@
   function copyVoucher(code){ try{ if(navigator.clipboard) navigator.clipboard.writeText(code); }catch(e){} toast('📋 Copied '+code); }
   function saveExhibitor(){ if(currentEx){ saved.add(currentEx.id); renderSaved(); toast('💾 '+currentEx.name+' saved'); } }
   function copyContactInfo(){ const e=currentEx; if(!e) return; const t=e.name+' · '+e.web+' · +91 96677 51132 · contactus@bvm2026.com'; try{ if(navigator.clipboard) navigator.clipboard.writeText(t); }catch(err){} toast('📋 Contact copied'); }
+
+  /* ---- visitor remark on an exhibitor (saved per exhibitor; shown back to the exhibitor on their dashboard) ---- */
+  const exhibitorRemarks = {};
+  function renderRemark(){
+    const e=currentEx, box=document.getElementById('emRemarkSaved'), ta=document.getElementById('emRemark'); if(!box) return;
+    const r=exhibitorRemarks[e&&e.id];
+    if(r){ box.classList.remove('hidden'); box.innerHTML=`<div class="bg-beige rounded-xl border border-line p-3"><div class="flex items-center justify-between"><p class="eyebrow text-accent">Saved remark · ${r.time}</p><button onclick="deleteRemark()" class="tap text-[11px] font-bold text-danger">Remove</button></div><p class="text-[14px] text-ink mt-1">“${r.text}”</p></div>`; if(ta) ta.value=r.text; }
+    else { box.classList.add('hidden'); box.innerHTML=''; if(ta) ta.value=''; }
+    icons();
+  }
+  function saveRemark(){
+    const e=currentEx; if(!e) return;
+    const ta=document.getElementById('emRemark'), txt=(ta&&ta.value||'').trim();
+    if(!txt){ toast('Write a remark first'); return; }
+    exhibitorRemarks[e.id]={text:txt, time:'Just now'};
+    renderRemark(); toast('📝 Remark saved — the exhibitor will see it');
+  }
+  function deleteRemark(){ const e=currentEx; if(e){ delete exhibitorRemarks[e.id]; renderRemark(); toast('Remark removed'); } }
 
   /* ---------- profile screen ---------- */
   function renderProfile(){
@@ -1952,6 +1997,7 @@
       {n:'Rahul Verma',c:'Verma Exports',a:'saved your stall',t:'2h ago',ic:'heart'},
       {n:'Sana Khan',c:'Khan Distributors',a:'downloaded your catalogue',t:'4h ago',ic:'book-open'},
     ];
+    const _r=exhibitorRemarks[exId]; if(_r) leads.unshift({n:'A visitor',c:'Private remark',a:'left a remark · "'+_r.text.slice(0,40)+(_r.text.length>40?'…':'')+'"',t:_r.time||'Just now',ic:'message-square'});
     document.getElementById('exLeads').innerHTML=leads.map(l=>{const ini=l.n.split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase();return `<div class="bg-white rounded-xl border border-line p-3 flex items-center gap-3 shadow-card"><div class="w-9 h-9 rounded-full bg-navy text-white flex items-center justify-center font-r font-bold text-sm shrink-0">${ini}</div><div class="flex-1 leading-tight min-w-0"><p class="font-semibold text-navy text-[14px] truncate">${l.n} · <span class="text-muted font-normal">${l.c}</span></p><p class="text-[12px] text-body flex items-center gap-1"><i data-lucide="${l.ic}" class="w-3 h-3 text-accent"></i> ${l.a}</p></div><span class="text-[11px] text-muted shrink-0 tnum">${l.t}</span></div>`}).join('');
     const reqs=[{n:'Aarav Sharma',c:'Sharma Trading Co.',d:'13 Aug · 11:30 AM'},{n:'Neha Gupta',c:'Gupta Retail',d:'14 Aug · 2:30 PM'}];
     document.getElementById('exMeetingReq').innerHTML=reqs.map(r=>`<div class="bg-white rounded-xl border border-line p-3"><div class="flex items-center justify-between"><div class="leading-tight"><p class="font-semibold text-navy text-[14px]">${r.n}</p><p class="text-[12px] text-muted">${r.c}</p></div><span class="text-[11px] font-bold text-accent">${r.d}</span></div><div class="flex gap-2 mt-2"><button onclick="toast('✅ Meeting accepted')" class="tap flex-1 bg-agri text-white font-r text-sm py-1.5 rounded-lg">Accept</button><button onclick="toast('Declined')" class="tap flex-1 border border-line text-body font-r text-sm py-1.5 rounded-lg">Decline</button></div></div>`).join('');
@@ -1968,6 +2014,11 @@
     document.getElementById('exfPrice').value=e.product.price;
     document.getElementById('exfPhone').value='+91 96677 51132';
     document.getElementById('exfWeb').value=e.web;
+    document.getElementById('exfFounded').value=e.founded;
+    document.getElementById('exfStaff').value=e.staff;
+    document.getElementById('exfExports').value=e.exports;
+    document.getElementById('exfAssets').innerHTML=docsFor(e).map(d=>`<div class="bg-white rounded-xl border border-line p-3 flex items-center gap-3 shadow-card"><div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0"><i data-lucide="${d.ic}" class="w-4 h-4 text-accent"></i></div><div class="flex-1 leading-tight min-w-0"><p class="font-semibold text-navy text-[13px] truncate">${d.nm}</p><p class="text-[10px] text-muted">${d.mt}</p></div><button onclick="${d.act}" class="tap text-[11px] font-bold text-accent px-2 py-1.5">Preview</button><button onclick="toast('⬆️ Replace ${d.nm} (demo)')" class="tap text-[11px] font-bold text-navy px-2.5 py-1.5 border border-line rounded-lg">Replace</button></div>`).join('');
+    icons();
   }
   function saveExProfile(){
     const e=byId(exId), g=id=>document.getElementById(id).value.trim();
@@ -1975,6 +2026,7 @@
     e.stall='Stall '+(g('exfStall')||e.stall.replace('Stall ',''));
     e.state=g('exfState')||e.state; e.blurb=g('exfAbout')||e.blurb;
     e.product.name=g('exfProduct')||e.product.name; e.product.price=g('exfPrice')||e.product.price; e.web=g('exfWeb')||e.web;
+    e.founded=g('exfFounded')||e.founded; e.staff=g('exfStaff')||e.staff; e.exports=g('exfExports')||e.exports;
     renderExhibitor(); renderFeatured(); renderGrid(); computeStallPositions(); renderMap();
     toast('✅ Profile updated — booth QR refreshed'); back();
   }
