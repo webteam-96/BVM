@@ -173,22 +173,42 @@
             <div class="relative h-full flex flex-col items-center justify-between py-10 px-6">
               <div class="flex-1 flex flex-col items-center justify-center text-center">
                 <div class="w-[290px] rounded-[24px] bg-white shadow-[0_18px_50px_-10px_rgba(0,0,0,.45)] flex items-center justify-center p-5 ring-4 ring-gold/25">
-                  <img src="https://bharatiyavyaparmahotsav.com/images/Bharat-Vyapar-Mahotsav.png" class="w-full object-contain" alt="Bharatiya Vyapar Mahotsav 2026">
+                  <img src="bvm-logo.png" class="w-full object-contain" alt="Bharatiya Vyapar Mahotsav 2026" onerror="this.onerror=null;this.src='https://bharatiyavyaparmahotsav.com/images/Bharat-Vyapar-Mahotsav.png'">
                 </div>
                 <p class="text-[11px] tracking-[.22em] text-[#8595DB] mt-5 font-medium uppercase">The Great Indian Common Market</p>
               </div>
 
               <div class="w-full">
-                <p class="text-center text-[10px] tracking-[.18em] text-white/45 mb-2.5 font-medium">SUPPORTED BY RI ZONES 4, 5, 6 &amp; 7</p>
-                <div class="grid grid-cols-2 gap-2.5">
-                  <div class="bg-white rounded-xl h-[58px] flex items-center justify-center px-3 py-2"><img src="https://bharatiyavyaparmahotsav.com/images/associate-partners/rotary.png" class="max-h-full max-w-full object-contain" alt="Rotary District 3011"></div>
-                  <div class="bg-white rounded-xl h-[58px] flex items-center justify-center px-3 py-2"><img src="https://bharatiyavyaparmahotsav.com/images/associate-partners/BSL.png" class="max-h-full max-w-full object-contain" alt="BSL — Brands & Sourcing Leaders Association"></div>
-                </div>
-                <p class="text-center text-[10px] text-white/40 mt-2.5">&amp; 40+ supporting trade associations</p>
-                <button onclick="goTo('login')" class="tap mt-4 w-full bg-cta text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-[0_10px_24px_-6px_rgba(160,65,0,.5)] flex items-center justify-center gap-2">GET STARTED <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                <button onclick="goTo('sponsors')" class="tap fab-ring rounded-xl w-full"><span class="molten flex items-center justify-center gap-2 w-full text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten">GET STARTED <i data-lucide="arrow-right" class="w-5 h-5"></i></span></button>
+                <p class="text-center text-[10px] text-white/40 mt-3 tracking-[.12em]">HONOURED BY OUR PARTNERS &amp; SPONSORS →</p>
               </div>
             </div>
-            <div class="absolute bottom-0 inset-x-0 h-[3px] bg-gold z-20"></div>
+            <div class="tricolor-thread absolute bottom-0 inset-x-0 z-20"></div>
+          </div>
+        </section>
+
+        <!-- ============ 1b · PARTNERS & SPONSORS ============ -->
+        <section id="screen-sponsors" class="screen">
+          <header class="bg-navy glass px-4 pt-3 pb-3 border-b-[3px] border-gold flex items-center justify-between">
+            <div class="flex items-center gap-3"><button onclick="back()" class="tap"><i data-lucide="arrow-left" class="w-6 h-6 text-white"></i></button><div class="leading-tight"><p class="eyebrow text-gold/90">Bharatiya Vyapar Mahotsav 2026</p><h1 class="font-r font-bold text-white text-2xl -mt-0.5">Partners &amp; Sponsors</h1></div></div>
+            <button onclick="goTo('login')" class="tap text-[11px] font-bold text-white/80 tracking-wide">SKIP</button>
+          </header>
+          <div class="flex-1 overflow-y-auto noscroll" style="background:#FBF8F1">
+            <div class="bg-night mesh bvm-grain px-4 pt-5 pb-6 text-center">
+              <p class="eyebrow text-gold">Inspired by the vision of</p>
+              <div class="mx-auto mt-3 w-40 rounded-2xl overflow-hidden ring-2 ring-gold/40 shadow-[0_12px_34px_-10px_rgba(0,0,0,.6)]"><img src="pm-india.png" class="w-full block" alt="Shri Narendra Modi, Hon'ble Prime Minister of India" onerror="this.closest('.bg-night').style.display='none'"></div>
+              <p class="text-[11px] text-white/60 mt-3 tracking-wide">Make in India · Make for the World</p>
+            </div>
+            <div class="tricolor-thread"></div>
+            <div class="px-4 py-4 space-y-4">
+              <p class="eyebrow text-accent text-center">A grand national initiative, proudly backed by</p>
+              <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[120px]"><img src="joint-initiative.png" class="max-w-full max-h-28 object-contain" alt="A Joint Initiative of ITPO & CAIT" loading="lazy"></div>
+              <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[130px]"><img src="knowledge-partner.png" class="max-w-full max-h-36 object-contain" alt="Knowledge Partner — BSL" loading="lazy"></div>
+              <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[120px]"><img src="social-impact.png" class="max-w-full max-h-32 object-contain" alt="Social Impact Partner — Rotary District 3011" loading="lazy"></div>
+              <div class="reveal-init bg-white rounded-2xl border border-line shadow-card p-5 flex items-center justify-center min-h-[150px]"><img src="host-state.png" class="max-w-full max-h-44 object-contain" alt="Host State — Government of NCT of Delhi & Delhi Tourism" loading="lazy"></div>
+              <div class="text-center pt-1"><p class="eyebrow text-accent">And</p><p class="font-r font-semibold text-navy text-lg -mt-0.5">40+ supporting trade associations</p></div>
+              <button onclick="goTo('login')" class="tap fab-ring rounded-xl w-full mt-1"><span class="molten flex items-center justify-center gap-2 w-full text-white font-r font-semibold text-lg tracking-wide py-4 rounded-xl shadow-molten">ENTER THE APP <i data-lucide="arrow-right" class="w-5 h-5"></i></span></button>
+            </div>
           </div>
         </section>
 
@@ -1307,7 +1327,7 @@
   EXHIBITORS.forEach(e=>{ const m=META[e.id]||{}; e.web=m.web||(e.id+'.com'); e.founded=m.founded||2012; e.staff=m.staff||'50–200'; e.exports=m.exports||'India'; e.rating=m.rating||4.6; e.reviews=m.reviews||80; });
 
   /* ---------- router ---------- */
-  const SCREENS = ['splash','login','home','stall','product','enquiry','saved-confirm','saved','zones','scanner','notifications','profile','map','meeting','exhibitor','exhibitor-edit','foryou','agenda','itinerary','enquiries','pass','sessions','exhibitor-materials'];
+  const SCREENS = ['splash','login','home','stall','product','enquiry','saved-confirm','saved','zones','scanner','notifications','profile','map','meeting','exhibitor','exhibitor-edit','foryou','agenda','itinerary','enquiries','pass','sessions','exhibitor-materials','sponsors'];
   let stack = ['splash'];
   const curr = () => stack[stack.length-1];
   let navDir='fwd';
@@ -2230,7 +2250,7 @@
   }
 
   /* ---------- jumper + fit ---------- */
-  const LABELS={'splash':'1 · Splash','login':'2 · Login','home':'3 · Home','stall':'4 · Stall','product':'5 · Product','enquiry':'6 · Enquiry','saved-confirm':'7 · Saved ✓','saved':'8 · Saved','zones':'9 · Zones','scanner':'10 · Scanner','notifications':'11 · Alerts','profile':'12 · Profile','map':'13 · Map','meeting':'14 · Meeting','exhibitor':'15 · Exhibitor','exhibitor-edit':'16 · Edit','foryou':'17 · For You','agenda':'18 · Agenda','itinerary':'19 · My Plan','enquiries':'20 · Enquiries','pass':'21 · Pass','sessions':'22 · Sessions','exhibitor-materials':'23 · Scan Card'};
+  const LABELS={'splash':'1 · Splash','login':'2 · Login','home':'3 · Home','stall':'4 · Stall','product':'5 · Product','enquiry':'6 · Enquiry','saved-confirm':'7 · Saved ✓','saved':'8 · Saved','zones':'9 · Zones','scanner':'10 · Scanner','notifications':'11 · Alerts','profile':'12 · Profile','map':'13 · Map','meeting':'14 · Meeting','exhibitor':'15 · Exhibitor','exhibitor-edit':'16 · Edit','foryou':'17 · For You','agenda':'18 · Agenda','itinerary':'19 · My Plan','enquiries':'20 · Enquiries','pass':'21 · Pass','sessions':'22 · Sessions','exhibitor-materials':'23 · Scan Card','sponsors':'24 · Partners'};
   function buildJumper(){ document.getElementById('jumper').innerHTML=SCREENS.map(id=>`<button data-jump="${id}" onclick="reset('${id}')" class="tap text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70">${LABELS[id]}</button>`).join(''); }
   function fit(){ const phone=document.getElementById('phone'); const scale=Math.min(1,(window.innerHeight-150)/880); phone.style.transform='scale('+scale+')'; phone.style.marginBottom=(scale<1?(880*scale-880):0)+'px'; }
 

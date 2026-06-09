@@ -6,3 +6,14 @@
 .dom.html
 *.tmp
 *.log
+
+# raw drop-in images (use the clean-named copies)
+BVM Logo png.png
+Hon'ble PM of India .png
+Host State Logos..png
+Joint initiative logos..png
+Knowledge Partner Logo..png
+Social Impact Partner Logo..png
+Bharat Mandapam-Png.png
+BVM Poster background..jpg.jpeg
+_shot/
